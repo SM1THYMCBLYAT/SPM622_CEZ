@@ -40,7 +40,7 @@ CheckInDate DATE,
 CheckOutDate DATE,
 PaymentStatus VARCHAR (20) NOT NULL,
 TotalPrice DECIMAL(10,2) NOT NULL,
-Price DACIMAL(10,2) NOT NULL,
+Price DECIMAL(10,2) NOT NULL,
 FOREIGN KEY (GuestID) REFERENCES Guests(GuestID),
 FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID),
 CONSTRAINT chk_PaymentStatus CHECK(PaymentStatus IN('Pending','Paid','Overdue'))
