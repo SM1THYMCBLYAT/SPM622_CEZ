@@ -169,7 +169,7 @@ VALUES
 (10, 5, '2026-11-20', '2026-11-30', '2026-11-20', NULL, 'Pending', 1500.00);
 
 
--- AUDIT LOG SAMPLE DATA
+-- AUDIT LOG SAMPLE DATA(extra) remove if not wanted XD
 INSERT INTO AuditLog
 (Username, RecordType, GivenID, QueryDate, Details)
 VALUES
