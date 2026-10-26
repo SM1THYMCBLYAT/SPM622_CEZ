@@ -1,0 +1,9 @@
+# Visual Studio cache and settings
+.vs/
+
+# Build output
+**/bin/
+**/obj/
+
+# User-specific Visual Studio settings
+*.csproj.user
