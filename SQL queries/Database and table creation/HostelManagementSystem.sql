@@ -40,7 +40,7 @@ CheckInDate DATE,
 CheckOutDate DATE,
 PaymentStatus VARCHAR (20) NOT NULL,
 TotalPrice DECIMAL(10,2) NOT NULL,
-Price DACIMAL(10,2) NOT NULL,
+Price DECIMAL(10,2) NOT NULL,
 FOREIGN KEY (GuestID) REFERENCES Guests(GuestID),
 FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID),
 CONSTRAINT chk_PaymentStatus CHECK(PaymentStatus IN('Pending','Paid','Overdue'))
@@ -158,14 +158,14 @@ INSERT INTO Bookings
 (GuestID, RoomID, BookingDateStart, BookingDateEnd,
  CheckInDate, CheckOutDate, PaymentStatus, TotalPrice,Price)
 VALUES
-(1, 3, '2026-11-01', '2026-12-05', '2026-11-01', NULL, 'Paid', 0,0),
-(2, 13, '2026-11-03', '2026-11-08', '2026-11-03', NULL, 'Paid', 0,0),
-(3, 21, '2026-11-10', '2026-11-25', NULL, NULL, 'Pending', 0,0),
-(4, 7, '2026-10-01', '2026-10-05', '2026-10-01', '2026-10-05', 'Paid', 0,0),
-(5, 15, '2026-11-12', '2026-11-20', '2026-11-12', NULL, 'Pending', 0,0),
-(6, 24, '2026-11-15', '2026-11-18', NULL, NULL, 'Pending', 0,0),
-(7, 23, '2026-11-02', '2026-11-10', '2026-11-02', NULL, 'Paid', 0,0),
-(8, 30, '2026-12-01', '2027-02-12', NULL, NULL, 'Pending', 0,0),
-(9, 17, '2026-10-10', '2026-10-14', '2026-10-10', '2026-10-14', 'Paid', 0,0),
-(10, 5, '2026-11-20', '2026-12-30', '2026-11-20', NULL, 'Pending', 0,0);
+(1, 3, '2026-11-01', '2026-12-05', '2026-11-01', NULL, 'Paid', 0.00,0.00),
+(2, 13, '2026-11-03', '2026-11-08', '2026-11-03', NULL, 'Paid', 0.00,0.00),
+(3, 21, '2026-11-10', '2026-11-25', NULL, NULL, 'Pending', 0.00,0.00),
+(4, 7, '2026-10-01', '2026-10-05', '2026-10-01', '2026-10-05', 'Paid', 0.00,0.00),
+(5, 15, '2026-11-12', '2026-11-20', '2026-11-12', NULL, 'Pending', 0.00,0.00),
+(6, 24, '2026-11-15', '2026-11-18', NULL, NULL, 'Pending', 0.00,0.00),
+(7, 23, '2026-11-02', '2026-11-10', '2026-11-02', NULL, 'Paid', 0.00,0.00),
+(8, 30, '2026-12-01', '2027-02-12', NULL, NULL, 'Pending', 0.00,0.00),
+(9, 17, '2026-10-10', '2026-10-14', '2026-10-10', '2026-10-14', 'Paid', 0.00,0.00),
+(10, 5, '2026-11-20', '2026-12-30', '2026-11-20', NULL, 'Pending', 0.00,0.00);
 
