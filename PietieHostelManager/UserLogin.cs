@@ -112,5 +112,39 @@ namespace PietieHostelManager
             UserLoginTextPassword.Clear();
             UserLoginTextPassword.Focus();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection connection =
+                       new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    MessageBox.Show(
+                        "Database connection successful!",
+                        "Connection Test",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Database connection failed.\n\n" + ex.Message,
+                    "Connection Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "An unexpected error occurred.\n\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -32,6 +32,7 @@
             UserLoginTextPassword = new TextBox();
             UserLoginButtonLogin = new Button();
             UserLoginButtonCancel = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // UserLoginTextUsername
@@ -71,11 +72,22 @@
             UserLoginButtonCancel.UseVisualStyleBackColor = true;
             UserLoginButtonCancel.Click += LoginButtonCancel_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(64, 222);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 4;
+            button1.Text = "test connection";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // UserLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(259, 439);
+            Controls.Add(button1);
             Controls.Add(UserLoginButtonCancel);
             Controls.Add(UserLoginButtonLogin);
             Controls.Add(UserLoginTextPassword);
@@ -97,5 +109,6 @@
         private TextBox UserLoginTextPassword;
         private Button UserLoginButtonLogin;
         private Button UserLoginButtonCancel;
+        private Button button1;
     }
 }
