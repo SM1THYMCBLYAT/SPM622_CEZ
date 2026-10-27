@@ -230,6 +230,7 @@ namespace PietieHostelManager
             UpdateRoomTypeFilter();
             LoadRoomsTable();
             LoadBookingsTable();
+            lblUsername.Text = User;
         }
 
         private void cmbRoomType_SelectedIndexChanged(object sender, EventArgs e)
@@ -283,6 +284,15 @@ namespace PietieHostelManager
         private void dtpAfter_ValueChanged(object sender, EventArgs e)
         {
             LoadBookingsTable();
+        }
+
+        private void btnSignOut_Click(object sender, EventArgs e)
+        {
+            User = "";
+            UserRole = "";
+            UserLogin userLogin = new UserLogin();
+            userLogin.Show();
+            this.Hide();
         }
     }
 }

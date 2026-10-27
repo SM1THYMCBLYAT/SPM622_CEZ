@@ -214,6 +214,7 @@
             btnSignOut.TabIndex = 1;
             btnSignOut.Text = "Sign out";
             btnSignOut.UseVisualStyleBackColor = true;
+            btnSignOut.Click += btnSignOut_Click;
             // 
             // panel4
             // 
@@ -390,7 +391,7 @@
             cmbFilterBooking.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbFilterBooking.Font = new Font("Segoe UI", 16F);
             cmbFilterBooking.FormattingEnabled = true;
-            cmbFilterBooking.Items.AddRange(new object[] { "Booking ID", "Room Number", "Full Name", "Phone", "Email" });
+            cmbFilterBooking.Items.AddRange(new object[] { "", "Booking ID", "Room Number", "Full Name", "Phone", "Email" });
             cmbFilterBooking.Location = new Point(17, 23);
             cmbFilterBooking.Name = "cmbFilterBooking";
             cmbFilterBooking.Size = new Size(176, 38);
