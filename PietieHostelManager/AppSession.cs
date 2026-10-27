@@ -24,7 +24,7 @@ namespace PietieHostelManager
             CurrentRole = role;
         }
 
-        public static void ClearUser()
+        public static void Clear()
         {
             CurrentUsername = string.Empty;
             CurrentRole = string.Empty;
