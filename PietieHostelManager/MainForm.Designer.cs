@@ -102,9 +102,10 @@
             // 
             // buttonCreateBooking
             // 
-            buttonCreateBooking.Location = new Point(3, 3);
+            buttonCreateBooking.Location = new Point(3, 2);
+            buttonCreateBooking.Margin = new Padding(3, 2, 3, 2);
             buttonCreateBooking.Name = "buttonCreateBooking";
-            buttonCreateBooking.Size = new Size(119, 91);
+            buttonCreateBooking.Size = new Size(104, 68);
             buttonCreateBooking.TabIndex = 4;
             buttonCreateBooking.Text = "Create Booking";
             buttonCreateBooking.UseVisualStyleBackColor = true;
@@ -112,9 +113,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(128, 3);
+            button2.Location = new Point(112, 2);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(125, 91);
+            button2.Size = new Size(109, 68);
             button2.TabIndex = 5;
             button2.Text = "Manage Guest/Bookings";
             button2.UseVisualStyleBackColor = true;
@@ -122,27 +124,27 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(3, 3);
+            label3.Location = new Point(3, 2);
             label3.Name = "label3";
-            label3.Size = new Size(69, 20);
+            label3.Size = new Size(55, 15);
             label3.TabIndex = 12;
             label3.Text = "REPORTS";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(3, 83);
+            label4.Location = new Point(3, 62);
             label4.Name = "label4";
-            label4.Size = new Size(285, 20);
+            label4.Size = new Size(223, 15);
             label4.TabIndex = 13;
             label4.Text = "(Creates report of Displayed guests table)";
-            label4.Click += label4_Click;
             // 
             // button9
             // 
-            button9.Location = new Point(0, 51);
+            button9.Location = new Point(0, 38);
+            button9.Margin = new Padding(3, 2, 3, 2);
             button9.Name = "button9";
-            button9.Size = new Size(131, 29);
+            button9.Size = new Size(115, 22);
             button9.TabIndex = 14;
             button9.Text = "Create Report";
             button9.UseVisualStyleBackColor = true;
@@ -150,26 +152,28 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(47, 28);
+            label1.Location = new Point(41, 21);
             label1.Name = "label1";
-            label1.Size = new Size(75, 20);
+            label1.Size = new Size(60, 15);
             label1.TabIndex = 15;
             label1.Text = "Username";
             // 
             // button3
             // 
-            button3.Location = new Point(37, 51);
+            button3.Location = new Point(32, 38);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(94, 29);
+            button3.Size = new Size(82, 22);
             button3.TabIndex = 16;
             button3.Text = "Sign out";
             button3.UseVisualStyleBackColor = true;
             // 
             // buttonOpenAdmin
             // 
-            buttonOpenAdmin.Location = new Point(167, 3);
+            buttonOpenAdmin.Location = new Point(146, 2);
+            buttonOpenAdmin.Margin = new Padding(3, 2, 3, 2);
             buttonOpenAdmin.Name = "buttonOpenAdmin";
-            buttonOpenAdmin.Size = new Size(97, 99);
+            buttonOpenAdmin.Size = new Size(85, 74);
             buttonOpenAdmin.TabIndex = 17;
             buttonOpenAdmin.Text = "Open Admin Panel";
             buttonOpenAdmin.UseVisualStyleBackColor = true;
@@ -178,24 +182,26 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(3, 6);
+            label2.Location = new Point(3, 4);
             label2.Name = "label2";
-            label2.Size = new Size(66, 20);
+            label2.Size = new Size(54, 15);
             label2.TabIndex = 18;
             label2.Text = "Number:";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(75, 2);
+            textBox1.Location = new Point(66, 2);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(90, 27);
+            textBox1.Size = new Size(79, 23);
             textBox1.TabIndex = 19;
             // 
             // button5
             // 
-            button5.Location = new Point(174, 2);
+            button5.Location = new Point(152, 2);
+            button5.Margin = new Padding(3, 2, 3, 2);
             button5.Name = "button5";
-            button5.Size = new Size(79, 29);
+            button5.Size = new Size(69, 22);
             button5.TabIndex = 20;
             button5.Text = "Show All";
             button5.UseVisualStyleBackColor = true;
@@ -205,39 +211,43 @@
             label5.AutoSize = true;
             label5.Location = new Point(3, 0);
             label5.Name = "label5";
-            label5.Size = new Size(45, 20);
+            label5.Size = new Size(36, 15);
             label5.TabIndex = 21;
             label5.Text = "Filter:";
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(54, 3);
+            comboBox1.Location = new Point(45, 2);
+            comboBox1.Margin = new Padding(3, 2, 3, 2);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(73, 28);
+            comboBox1.Size = new Size(64, 23);
             comboBox1.TabIndex = 22;
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(133, 3);
+            comboBox2.Location = new Point(115, 2);
+            comboBox2.Margin = new Padding(3, 2, 3, 2);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(74, 28);
+            comboBox2.Size = new Size(65, 23);
             comboBox2.TabIndex = 23;
             // 
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(213, 3);
+            comboBox3.Location = new Point(186, 2);
+            comboBox3.Margin = new Padding(3, 2, 3, 2);
             comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(73, 28);
+            comboBox3.Size = new Size(64, 23);
             comboBox3.TabIndex = 24;
             // 
             // button6
             // 
-            button6.Location = new Point(3, 3);
+            button6.Location = new Point(3, 2);
+            button6.Margin = new Padding(3, 2, 3, 2);
             button6.Name = "button6";
-            button6.Size = new Size(77, 28);
+            button6.Size = new Size(67, 21);
             button6.TabIndex = 25;
             button6.Text = "Show All";
             button6.UseVisualStyleBackColor = true;
@@ -245,73 +255,79 @@
             // comboBox4
             // 
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(292, 3);
+            comboBox4.Location = new Point(256, 2);
+            comboBox4.Margin = new Padding(3, 2, 3, 2);
             comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(62, 28);
+            comboBox4.Size = new Size(55, 23);
             comboBox4.TabIndex = 26;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(200, 6);
+            label6.Location = new Point(175, 4);
             label6.Name = "label6";
-            label6.Size = new Size(12, 20);
+            label6.Size = new Size(10, 15);
             label6.TabIndex = 27;
             label6.Text = ":";
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(218, 4);
+            textBox2.Location = new Point(191, 3);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(218, 27);
+            textBox2.Size = new Size(191, 23);
             textBox2.TabIndex = 28;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(3, 7);
+            label7.Location = new Point(3, 5);
             label7.Name = "label7";
-            label7.Size = new Size(46, 20);
+            label7.Size = new Size(38, 15);
             label7.TabIndex = 29;
             label7.Text = "From:";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(150, 7);
+            label8.Location = new Point(131, 5);
             label8.Name = "label8";
-            label8.Size = new Size(25, 20);
+            label8.Size = new Size(20, 15);
             label8.TabIndex = 30;
             label8.Text = "To";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(55, 6);
+            dateTimePicker1.Location = new Point(48, 4);
+            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(89, 27);
+            dateTimePicker1.Size = new Size(78, 23);
             dateTimePicker1.TabIndex = 32;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(181, 7);
+            dateTimePicker2.Location = new Point(158, 5);
+            dateTimePicker2.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(92, 27);
+            dateTimePicker2.Size = new Size(81, 23);
             dateTimePicker2.TabIndex = 33;
             // 
             // comboBox5
             // 
             comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(3, 3);
+            comboBox5.Location = new Point(3, 2);
+            comboBox5.Margin = new Padding(3, 2, 3, 2);
             comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(108, 28);
+            comboBox5.Size = new Size(95, 23);
             comboBox5.TabIndex = 34;
             // 
             // comboBox6
             // 
             comboBox6.FormattingEnabled = true;
-            comboBox6.Location = new Point(117, 3);
+            comboBox6.Location = new Point(102, 2);
+            comboBox6.Margin = new Padding(3, 2, 3, 2);
             comboBox6.Name = "comboBox6";
-            comboBox6.Size = new Size(108, 28);
+            comboBox6.Size = new Size(95, 23);
             comboBox6.TabIndex = 35;
             // 
             // dataGridView1
@@ -320,10 +336,11 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { RoomTableRoomID, RoomtableRoomStatus, RoomTableRoomType, RoomTableRoomOccupants });
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 203);
+            dataGridView1.Location = new Point(3, 152);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(641, 473);
+            dataGridView1.Size = new Size(560, 355);
             dataGridView1.TabIndex = 0;
             // 
             // RoomTableRoomID
@@ -356,10 +373,11 @@
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { GuestTableGuestID, GuestTableRoomNumber, GuestTableFullName, GuestTablePhoneNumber, GuestTableEmail, GuestTableStartDate, GuestTableEndDate, GuestTablePrice, GuestTablePayment, GuestTableOccupancy });
             dataGridView2.Dock = DockStyle.Fill;
-            dataGridView2.Location = new Point(650, 203);
+            dataGridView2.Location = new Point(569, 152);
+            dataGridView2.Margin = new Padding(3, 2, 3, 2);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(1197, 473);
+            dataGridView2.Size = new Size(1047, 355);
             dataGridView2.TabIndex = 1;
             // 
             // GuestTableGuestID
@@ -425,9 +443,10 @@
             // comboBox7
             // 
             comboBox7.FormattingEnabled = true;
-            comboBox7.Location = new Point(86, 3);
+            comboBox7.Location = new Point(75, 2);
+            comboBox7.Margin = new Padding(3, 2, 3, 2);
             comboBox7.Name = "comboBox7";
-            comboBox7.Size = new Size(108, 28);
+            comboBox7.Size = new Size(95, 23);
             comboBox7.TabIndex = 40;
             // 
             // MainFormTableLayout
@@ -442,11 +461,12 @@
             MainFormTableLayout.Controls.Add(tableLayoutPanel3, 1, 0);
             MainFormTableLayout.Dock = DockStyle.Fill;
             MainFormTableLayout.Location = new Point(0, 0);
+            MainFormTableLayout.Margin = new Padding(3, 2, 3, 2);
             MainFormTableLayout.Name = "MainFormTableLayout";
             MainFormTableLayout.RowCount = 2;
-            MainFormTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
+            MainFormTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
             MainFormTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            MainFormTableLayout.Size = new Size(1850, 679);
+            MainFormTableLayout.Size = new Size(1619, 509);
             MainFormTableLayout.TabIndex = 41;
             // 
             // tableLayoutPanel2
@@ -454,27 +474,29 @@
             tableLayoutPanel2.BackColor = SystemColors.HotTrack;
             tableLayoutPanel2.ColumnCount = 1;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 18F));
             tableLayoutPanel2.Controls.Add(panel3, 0, 0);
             tableLayoutPanel2.Controls.Add(flowLayoutPanel1, 0, 2);
             tableLayoutPanel2.Controls.Add(panel4, 0, 1);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 3);
+            tableLayoutPanel2.Location = new Point(3, 2);
+            tableLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel2.Size = new Size(641, 194);
+            tableLayoutPanel2.Size = new Size(560, 146);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // panel3
             // 
             panel3.Controls.Add(buttonCreateBooking);
             panel3.Controls.Add(button2);
-            panel3.Location = new Point(3, 3);
+            panel3.Location = new Point(3, 2);
+            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(574, 100);
+            panel3.Size = new Size(502, 75);
             panel3.TabIndex = 42;
             // 
             // flowLayoutPanel1
@@ -487,9 +509,10 @@
             flowLayoutPanel1.Controls.Add(comboBox3);
             flowLayoutPanel1.Controls.Add(comboBox4);
             flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(3, 157);
+            flowLayoutPanel1.Location = new Point(3, 118);
+            flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(635, 34);
+            flowLayoutPanel1.Size = new Size(554, 26);
             flowLayoutPanel1.TabIndex = 45;
             flowLayoutPanel1.WrapContents = false;
             // 
@@ -501,9 +524,10 @@
             panel4.Controls.Add(textBox1);
             panel4.Controls.Add(button5);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(3, 119);
+            panel4.Location = new Point(3, 89);
+            panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(635, 32);
+            panel4.Size = new Size(554, 25);
             panel4.TabIndex = 43;
             // 
             // tableLayoutPanel3
@@ -511,16 +535,17 @@
             tableLayoutPanel3.BackColor = SystemColors.HotTrack;
             tableLayoutPanel3.ColumnCount = 1;
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 18F));
             tableLayoutPanel3.Controls.Add(panel1, 0, 0);
             tableLayoutPanel3.Controls.Add(flowLayoutPanel2, 0, 1);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(650, 3);
+            tableLayoutPanel3.Location = new Point(569, 2);
+            tableLayoutPanel3.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel3.Size = new Size(1197, 194);
+            tableLayoutPanel3.Size = new Size(1047, 146);
             tableLayoutPanel3.TabIndex = 3;
             // 
             // panel1
@@ -529,9 +554,10 @@
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(panel9);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 3);
+            panel1.Location = new Point(3, 2);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1191, 149);
+            panel1.Size = new Size(1041, 112);
             panel1.TabIndex = 0;
             // 
             // panel2
@@ -540,9 +566,10 @@
             panel2.Controls.Add(buttonOpenAdmin);
             panel2.Controls.Add(button3);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(921, 3);
+            panel2.Location = new Point(805, 2);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(267, 115);
+            panel2.Size = new Size(234, 86);
             panel2.TabIndex = 41;
             // 
             // panel9
@@ -550,9 +577,10 @@
             panel9.Controls.Add(label3);
             panel9.Controls.Add(button9);
             panel9.Controls.Add(label4);
-            panel9.Location = new Point(109, 8);
+            panel9.Location = new Point(95, 6);
+            panel9.Margin = new Padding(3, 2, 3, 2);
             panel9.Name = "panel9";
-            panel9.Size = new Size(323, 125);
+            panel9.Size = new Size(283, 94);
             panel9.TabIndex = 48;
             // 
             // flowLayoutPanel2
@@ -561,9 +589,10 @@
             flowLayoutPanel2.Controls.Add(panel7);
             flowLayoutPanel2.Controls.Add(panel8);
             flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.Location = new Point(3, 158);
+            flowLayoutPanel2.Location = new Point(3, 118);
+            flowLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(1191, 33);
+            flowLayoutPanel2.Size = new Size(1041, 26);
             flowLayoutPanel2.TabIndex = 1;
             // 
             // panel6
@@ -573,9 +602,10 @@
             panel6.Controls.Add(comboBox7);
             panel6.Controls.Add(label6);
             panel6.Controls.Add(textBox2);
-            panel6.Location = new Point(3, 3);
+            panel6.Location = new Point(3, 2);
+            panel6.Margin = new Padding(3, 2, 3, 2);
             panel6.Name = "panel6";
-            panel6.Size = new Size(439, 34);
+            panel6.Size = new Size(385, 28);
             panel6.TabIndex = 45;
             // 
             // panel7
@@ -585,9 +615,10 @@
             panel7.Controls.Add(dateTimePicker2);
             panel7.Controls.Add(dateTimePicker1);
             panel7.Controls.Add(label8);
-            panel7.Location = new Point(448, 3);
+            panel7.Location = new Point(394, 2);
+            panel7.Margin = new Padding(3, 2, 3, 2);
             panel7.Name = "panel7";
-            panel7.Size = new Size(276, 37);
+            panel7.Size = new Size(242, 30);
             panel7.TabIndex = 46;
             // 
             // panel8
@@ -596,21 +627,23 @@
             panel8.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel8.Controls.Add(comboBox5);
             panel8.Controls.Add(comboBox6);
-            panel8.Location = new Point(730, 3);
+            panel8.Location = new Point(642, 2);
+            panel8.Margin = new Padding(3, 2, 3, 2);
             panel8.Name = "panel8";
-            panel8.Size = new Size(228, 34);
+            panel8.Size = new Size(200, 27);
             panel8.TabIndex = 47;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1850, 679);
+            ClientSize = new Size(1619, 509);
             Controls.Add(MainFormTableLayout);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
-            Text = "Form1";
+            Text = "Hostel Manager";
             WindowState = FormWindowState.Maximized;
-            Load += Form1_Load;
+            FormClosed += MainForm_FormClosed;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             MainFormTableLayout.ResumeLayout(false);
