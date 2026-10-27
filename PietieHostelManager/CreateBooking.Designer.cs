@@ -1,6 +1,6 @@
 ﻿namespace PietieHostelManager
 {
-    partial class CreateBooking
+    partial class CreateBookingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,30 +33,25 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
+            AddFirstNameTextBox = new TextBox();
+            AddLastNameTextBox = new TextBox();
+            AddPhoneTextBox = new TextBox();
+            AddEmailTextBox = new TextBox();
             label6 = new Label();
-            dataGridView1 = new DataGridView();
-            CreateBookingRoomNumber = new DataGridViewTextBoxColumn();
-            CreateBookingRoomStatus = new DataGridViewTextBoxColumn();
-            CreateBookingRoomType = new DataGridViewTextBoxColumn();
-            CreateBookingRoomOccupants = new DataGridViewTextBoxColumn();
-            label7 = new Label();
+            CreateBookingDataGridView = new DataGridView();
             label8 = new Label();
             label9 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
+            CreateBookingStartDatePicker = new DateTimePicker();
+            CreateBookingEndDatePicker = new DateTimePicker();
             label10 = new Label();
             label11 = new Label();
-            comboBox1 = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
-            checkBox1 = new CheckBox();
-            checkBox2 = new CheckBox();
-            textBox5 = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            CreatePaymentStatusComboBox = new ComboBox();
+            CreateBookingButton = new Button();
+            CancelBookingButton = new Button();
+            AddNoPhoneCheckBox = new CheckBox();
+            AddNoEmailCheckBox = new CheckBox();
+            CreateTotalPriceTextBox = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)CreateBookingDataGridView).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -105,33 +100,33 @@
             label5.TabIndex = 4;
             label5.Text = "Email Address:";
             // 
-            // textBox1
+            // AddFirstNameTextBox
             // 
-            textBox1.Location = new Point(159, 56);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 5;
+            AddFirstNameTextBox.Location = new Point(159, 56);
+            AddFirstNameTextBox.Name = "AddFirstNameTextBox";
+            AddFirstNameTextBox.Size = new Size(125, 27);
+            AddFirstNameTextBox.TabIndex = 5;
             // 
-            // textBox2
+            // AddLastNameTextBox
             // 
-            textBox2.Location = new Point(159, 89);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 6;
+            AddLastNameTextBox.Location = new Point(159, 89);
+            AddLastNameTextBox.Name = "AddLastNameTextBox";
+            AddLastNameTextBox.Size = new Size(125, 27);
+            AddLastNameTextBox.TabIndex = 6;
             // 
-            // textBox3
+            // AddPhoneTextBox
             // 
-            textBox3.Location = new Point(159, 122);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(125, 27);
-            textBox3.TabIndex = 7;
+            AddPhoneTextBox.Location = new Point(159, 122);
+            AddPhoneTextBox.Name = "AddPhoneTextBox";
+            AddPhoneTextBox.Size = new Size(125, 27);
+            AddPhoneTextBox.TabIndex = 7;
             // 
-            // textBox4
+            // AddEmailTextBox
             // 
-            textBox4.Location = new Point(159, 155);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(125, 27);
-            textBox4.TabIndex = 8;
+            AddEmailTextBox.Location = new Point(159, 155);
+            AddEmailTextBox.Name = "AddEmailTextBox";
+            AddEmailTextBox.Size = new Size(125, 27);
+            AddEmailTextBox.TabIndex = 8;
             // 
             // label6
             // 
@@ -143,50 +138,19 @@
             label6.TabIndex = 9;
             label6.Text = "Create booking";
             // 
-            // dataGridView1
+            // CreateBookingDataGridView
             // 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeight = 29;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { CreateBookingRoomNumber, CreateBookingRoomStatus, CreateBookingRoomType, CreateBookingRoomOccupants });
-            dataGridView1.Location = new Point(12, 216);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(416, 188);
-            dataGridView1.TabIndex = 10;
-            // 
-            // CreateBookingRoomNumber
-            // 
-            CreateBookingRoomNumber.HeaderText = "Room Number";
-            CreateBookingRoomNumber.MinimumWidth = 6;
-            CreateBookingRoomNumber.Name = "CreateBookingRoomNumber";
-            // 
-            // CreateBookingRoomStatus
-            // 
-            CreateBookingRoomStatus.HeaderText = "Status";
-            CreateBookingRoomStatus.MinimumWidth = 6;
-            CreateBookingRoomStatus.Name = "CreateBookingRoomStatus";
-            // 
-            // CreateBookingRoomType
-            // 
-            CreateBookingRoomType.HeaderText = "Type";
-            CreateBookingRoomType.MinimumWidth = 6;
-            CreateBookingRoomType.Name = "CreateBookingRoomType";
-            // 
-            // CreateBookingRoomOccupants
-            // 
-            CreateBookingRoomOccupants.HeaderText = "Occupants";
-            CreateBookingRoomOccupants.MinimumWidth = 6;
-            CreateBookingRoomOccupants.Name = "CreateBookingRoomOccupants";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.ForeColor = Color.Red;
-            label7.Location = new Point(323, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(105, 20);
-            label7.TabIndex = 11;
-            label7.Text = "required fields";
+            CreateBookingDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CreateBookingDataGridView.ColumnHeadersHeight = 29;
+            CreateBookingDataGridView.Location = new Point(12, 216);
+            CreateBookingDataGridView.Name = "CreateBookingDataGridView";
+            CreateBookingDataGridView.ReadOnly = true;
+            CreateBookingDataGridView.RowHeadersVisible = false;
+            CreateBookingDataGridView.RowHeadersWidth = 51;
+            CreateBookingDataGridView.Size = new Size(768, 188);
+            CreateBookingDataGridView.TabIndex = 10;
+            CreateBookingDataGridView.CellContentClick += CreateBookingDataGridView_CellContentClick;
+            CreateBookingDataGridView.SelectionChanged += CreateBookingDataGridView_SelectionChanged;
             // 
             // label8
             // 
@@ -206,21 +170,23 @@
             label9.TabIndex = 13;
             label9.Text = "End Date:";
             // 
-            // dateTimePicker1
+            // CreateBookingStartDatePicker
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(159, 410);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(125, 27);
-            dateTimePicker1.TabIndex = 14;
+            CreateBookingStartDatePicker.Format = DateTimePickerFormat.Short;
+            CreateBookingStartDatePicker.Location = new Point(159, 410);
+            CreateBookingStartDatePicker.Name = "CreateBookingStartDatePicker";
+            CreateBookingStartDatePicker.Size = new Size(125, 27);
+            CreateBookingStartDatePicker.TabIndex = 14;
+            CreateBookingStartDatePicker.ValueChanged += BookingStartDatePicker_ValueChanged;
             // 
-            // dateTimePicker2
+            // CreateBookingEndDatePicker
             // 
-            dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(159, 443);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(125, 27);
-            dateTimePicker2.TabIndex = 15;
+            CreateBookingEndDatePicker.Format = DateTimePickerFormat.Short;
+            CreateBookingEndDatePicker.Location = new Point(159, 443);
+            CreateBookingEndDatePicker.Name = "CreateBookingEndDatePicker";
+            CreateBookingEndDatePicker.Size = new Size(125, 27);
+            CreateBookingEndDatePicker.TabIndex = 15;
+            CreateBookingEndDatePicker.ValueChanged += BookingEndDatePicker_ValueChanged;
             // 
             // label10
             // 
@@ -240,95 +206,103 @@
             label11.TabIndex = 17;
             label11.Text = "Payment Status:";
             // 
-            // comboBox1
+            // CreatePaymentStatusComboBox
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(159, 509);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(125, 28);
-            comboBox1.TabIndex = 19;
+            CreatePaymentStatusComboBox.FormattingEnabled = true;
+            CreatePaymentStatusComboBox.Location = new Point(159, 509);
+            CreatePaymentStatusComboBox.Name = "CreatePaymentStatusComboBox";
+            CreatePaymentStatusComboBox.Size = new Size(125, 28);
+            CreatePaymentStatusComboBox.TabIndex = 19;
             // 
-            // button1
+            // CreateBookingButton
             // 
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(12, 584);
-            button1.Name = "button1";
-            button1.Size = new Size(142, 29);
-            button1.TabIndex = 20;
-            button1.Text = "Create Booking";
-            button1.UseVisualStyleBackColor = true;
+            CreateBookingButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CreateBookingButton.Location = new Point(12, 584);
+            CreateBookingButton.Name = "CreateBookingButton";
+            CreateBookingButton.Size = new Size(142, 29);
+            CreateBookingButton.TabIndex = 20;
+            CreateBookingButton.Text = "Create Booking";
+            CreateBookingButton.UseVisualStyleBackColor = true;
+            CreateBookingButton.Click += CreateBookingButton_Click;
             // 
-            // button2
+            // CancelBookingButton
             // 
-            button2.BackColor = Color.OrangeRed;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(296, 584);
-            button2.Name = "button2";
-            button2.Size = new Size(142, 29);
-            button2.TabIndex = 21;
-            button2.Text = "Cancel Booking";
-            button2.UseVisualStyleBackColor = false;
+            CancelBookingButton.BackColor = Color.OrangeRed;
+            CancelBookingButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CancelBookingButton.ForeColor = Color.White;
+            CancelBookingButton.Location = new Point(296, 584);
+            CancelBookingButton.Name = "CancelBookingButton";
+            CancelBookingButton.Size = new Size(142, 29);
+            CancelBookingButton.TabIndex = 21;
+            CancelBookingButton.Text = "Cancel Booking";
+            CancelBookingButton.UseVisualStyleBackColor = false;
+            CancelBookingButton.Click += CancelBookingButton_Click;
             // 
-            // checkBox1
+            // AddNoPhoneCheckBox
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(290, 127);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(154, 24);
-            checkBox1.TabIndex = 22;
-            checkBox1.Text = "No Phone Number";
-            checkBox1.UseVisualStyleBackColor = true;
+            AddNoPhoneCheckBox.AutoSize = true;
+            AddNoPhoneCheckBox.Location = new Point(290, 127);
+            AddNoPhoneCheckBox.Name = "AddNoPhoneCheckBox";
+            AddNoPhoneCheckBox.Size = new Size(154, 24);
+            AddNoPhoneCheckBox.TabIndex = 22;
+            AddNoPhoneCheckBox.Text = "No Phone Number";
+            AddNoPhoneCheckBox.UseVisualStyleBackColor = true;
+            AddNoPhoneCheckBox.CheckedChanged += NoPhoneCheckBox_CheckedChanged;
             // 
-            // checkBox2
+            // AddNoEmailCheckBox
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(290, 157);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(149, 24);
-            checkBox2.TabIndex = 23;
-            checkBox2.Text = "No Email Address";
-            checkBox2.UseVisualStyleBackColor = true;
+            AddNoEmailCheckBox.AutoSize = true;
+            AddNoEmailCheckBox.Location = new Point(290, 157);
+            AddNoEmailCheckBox.Name = "AddNoEmailCheckBox";
+            AddNoEmailCheckBox.Size = new Size(149, 24);
+            AddNoEmailCheckBox.TabIndex = 23;
+            AddNoEmailCheckBox.Text = "No Email Address";
+            AddNoEmailCheckBox.UseVisualStyleBackColor = true;
+            AddNoEmailCheckBox.CheckedChanged += NoEmailCheckBox_CheckedChanged;
             // 
-            // textBox5
+            // CreateTotalPriceTextBox
             // 
-            textBox5.Location = new Point(159, 476);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(125, 27);
-            textBox5.TabIndex = 24;
+            CreateTotalPriceTextBox.Location = new Point(159, 476);
+            CreateTotalPriceTextBox.Name = "CreateTotalPriceTextBox";
+            CreateTotalPriceTextBox.Size = new Size(125, 27);
+            CreateTotalPriceTextBox.TabIndex = 24;
             // 
-            // CreateBooking
+            // CreateBookingForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(450, 625);
-            Controls.Add(textBox5);
-            Controls.Add(checkBox2);
-            Controls.Add(checkBox1);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(comboBox1);
+            ClientSize = new Size(982, 653);
+            Controls.Add(CreateTotalPriceTextBox);
+            Controls.Add(AddNoEmailCheckBox);
+            Controls.Add(AddNoPhoneCheckBox);
+            Controls.Add(CancelBookingButton);
+            Controls.Add(CreateBookingButton);
+            Controls.Add(CreatePaymentStatusComboBox);
             Controls.Add(label11);
             Controls.Add(label10);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(CreateBookingEndDatePicker);
+            Controls.Add(CreateBookingStartDatePicker);
             Controls.Add(label9);
             Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(dataGridView1);
+            Controls.Add(CreateBookingDataGridView);
             Controls.Add(label6);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(AddEmailTextBox);
+            Controls.Add(AddPhoneTextBox);
+            Controls.Add(AddLastNameTextBox);
+            Controls.Add(AddFirstNameTextBox);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "CreateBooking";
-            Text = "CreateBooking";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "CreateBookingForm";
+            Text = "Create Guest and Booking";
+            WindowState = FormWindowState.Maximized;
+            Load += CreateBooking_Load;
+            ((System.ComponentModel.ISupportInitialize)CreateBookingDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -340,28 +314,23 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox AddFirstNameTextBox;
+        private TextBox AddLastNameTextBox;
+        private TextBox AddPhoneTextBox;
+        private TextBox AddEmailTextBox;
         private Label label6;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn CreateBookingRoomNumber;
-        private DataGridViewTextBoxColumn CreateBookingRoomStatus;
-        private DataGridViewTextBoxColumn CreateBookingRoomType;
-        private DataGridViewTextBoxColumn CreateBookingRoomOccupants;
-        private Label label7;
+        private DataGridView CreateBookingDataGridView;
         private Label label8;
         private Label label9;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker CreateBookingStartDatePicker;
+        private DateTimePicker CreateBookingEndDatePicker;
         private Label label10;
         private Label label11;
-        private ComboBox comboBox1;
-        private Button button1;
-        private Button button2;
-        private CheckBox checkBox1;
-        private CheckBox checkBox2;
-        private TextBox textBox5;
+        private ComboBox CreatePaymentStatusComboBox;
+        private Button CreateBookingButton;
+        private Button CancelBookingButton;
+        private CheckBox AddNoPhoneCheckBox;
+        private CheckBox AddNoEmailCheckBox;
+        private TextBox CreateTotalPriceTextBox;
     }
 }
