@@ -138,6 +138,7 @@
             // 
             // dtpBefore
             // 
+            dtpBefore.Checked = false;
             dtpBefore.CustomFormat = "yyyy-MM-dd";
             dtpBefore.Format = DateTimePickerFormat.Custom;
             dtpBefore.Location = new Point(457, 144);
@@ -145,6 +146,7 @@
             dtpBefore.ShowCheckBox = true;
             dtpBefore.Size = new Size(200, 23);
             dtpBefore.TabIndex = 8;
+            dtpBefore.ValueChanged += dtpBefore_ValueChanged;
             // 
             // label8
             // 
@@ -168,6 +170,7 @@
             // 
             // dtpAfter
             // 
+            dtpAfter.Checked = false;
             dtpAfter.CustomFormat = "yyyy-MM-dd";
             dtpAfter.Format = DateTimePickerFormat.Custom;
             dtpAfter.Location = new Point(457, 74);
@@ -175,6 +178,7 @@
             dtpAfter.ShowCheckBox = true;
             dtpAfter.Size = new Size(200, 23);
             dtpAfter.TabIndex = 4;
+            dtpAfter.ValueChanged += dtpAfter_ValueChanged;
             // 
             // label6
             // 
@@ -343,6 +347,7 @@
             btnShowAllBookings.TabIndex = 11;
             btnShowAllBookings.Text = "Show All";
             btnShowAllBookings.UseVisualStyleBackColor = true;
+            btnShowAllBookings.Click += btnShowAllBookings_Click;
             // 
             // btnSearchBookings
             // 
@@ -353,6 +358,7 @@
             btnSearchBookings.Size = new Size(40, 36);
             btnSearchBookings.TabIndex = 10;
             btnSearchBookings.UseVisualStyleBackColor = true;
+            btnSearchBookings.Click += btnSearchBookings_Click;
             // 
             // imageList2
             // 
@@ -410,6 +416,7 @@
             cmbPaymentStatus.Name = "cmbPaymentStatus";
             cmbPaymentStatus.Size = new Size(164, 38);
             cmbPaymentStatus.TabIndex = 5;
+            cmbPaymentStatus.SelectedIndexChanged += cmbPaymentStatus_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -431,6 +438,7 @@
             cmbOccupancy.Name = "cmbOccupancy";
             cmbOccupancy.Size = new Size(164, 38);
             cmbOccupancy.TabIndex = 3;
+            cmbOccupancy.SelectedIndexChanged += cmbOccupancy_SelectedIndexChanged;
             // 
             // dgvBookings
             // 

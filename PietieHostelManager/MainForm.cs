@@ -61,8 +61,8 @@ namespace PietieHostelManager
                 dgvRooms.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
                 dgvRooms.Columns["Room#"].Width = 87;
-                dgvRooms.Columns["Status"].Width = 140;
-                dgvRooms.Columns["Type"].Width = 130;
+                dgvRooms.Columns["Status"].Width = 127;
+                dgvRooms.Columns["Type"].Width = 126;
                 dgvRooms.Columns["Occupants"].Width = 80;
             }
             catch (SqlException ex)
@@ -81,33 +81,6 @@ namespace PietieHostelManager
             try
             {
                 string searchCondition;
-                string paymentStatus = cmbPaymentStatus.Text;
-                string occupancy = cmbOccupancy.Text;
-
-                string sql = @"SELECT
-                                   b.BookingID,
-                                   r.RoomNumber AS [Room#],
-                                   (g.FirstName + ' ' + g.LastName) AS [Full Name],
-                                   g.PhoneNumber AS [Phone],
-                                   g.Email,
-                                   b.BookingDateStart AS [Start Date]
-                                   b.BookingDateEnd AS [End Date],
-                                   b.Price,
-                                   b.TotalPrice,
-                                   b.PaymentStatus,
-                                   g.Occupancy
-                               FROM Bookings b
-                               INNER JOIN Rooms r ON b.RoomID = r.RoomID
-                               INNER JOIN Guests g ON b.GuestID = g.GuestID
-                               WHERE {searchCondition}
-                                 AND (@StartDate IS NULL OR bBookingDateStart >= @StartDate)
-                                 AND (@EndDate IS NULL OR bBookingDateEnd <= @EndDate)
-                                 AND (@PaymentStatus IS NULL OR b.PaymentStatus = @PaymentStatus)
-                                 AND (@Occupancy IS NULL OR g.Occupancy = @Occupancy);";
-
-                SqlConnection conn = new SqlConnection(connectionString);
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
                 switch (cmbFilterBooking.SelectedIndex)
                 {
                     case 1:
@@ -117,18 +90,47 @@ namespace PietieHostelManager
                         searchCondition = "r.RoomNumber LIKE @SearchText";
                         break;
                     case 3:
-                        searchCondition = "(g.FirstName + ' ' + g.LastName) LIKE %@SearchText%";
+                        searchCondition = "(g.FirstName + ' ' + g.LastName) LIKE @SearchText";
                         break;
                     case 4:
-                        searchCondition = "g.PhoneNumber LIKE %@SearchText%";
+                        searchCondition = "g.PhoneNumber LIKE @SearchText";
                         break;
                     case 5:
-                        searchCondition = "g.Email LIKE %@SearchText%";
+                        searchCondition = "g.Email LIKE @SearchText";
                         break;
                     default:
                         searchCondition = "1=1";
                         break;
                 }
+                string sql = $@"SELECT
+                                   b.BookingID,
+                                   r.RoomNumber AS [Room#],
+                                   (g.FirstName + ' ' + g.LastName) AS [Full Name],
+                                   g.PhoneNumber AS [Phone],
+                                   g.Email,
+                                   b.BookingDateStart AS [Start Date],
+                                   b.BookingDateEnd AS [End Date],
+                                   b.Price,
+                                   b.TotalPrice AS [Total Price],
+                                   b.PaymentStatus AS [Payment Status],
+                                   g.Occupancy
+                               FROM Bookings b
+                               INNER JOIN Rooms r ON b.RoomID = r.RoomID
+                               INNER JOIN Guests g ON b.GuestID = g.GuestID
+                               WHERE ({searchCondition})
+                                 AND (@StartDate IS NULL OR b.BookingDateStart >= @StartDate)
+                                 AND (@EndDate IS NULL OR b.BookingDateEnd <= @EndDate)
+                                 AND (@PaymentStatus IS NULL OR b.PaymentStatus = @PaymentStatus)
+                                 AND (@Occupancy IS NULL OR g.Occupancy = @Occupancy);";
+                string paymentStatus = cmbPaymentStatus.Text;
+                string occupancy = cmbOccupancy.Text;
+
+                SqlConnection conn = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                string search = txtSearchBox.Text.Trim();
+                if (string.IsNullOrEmpty(search)) { cmd.Parameters.AddWithValue("@SearchText", DBNull.Value); }
+                else { cmd.Parameters.AddWithValue("@SearchText", "%" + search + "%"); }
 
                 if (!dtpAfter.Checked) { cmd.Parameters.AddWithValue("@StartDate", DBNull.Value); }
                 else { cmd.Parameters.Add("@StartDate", SqlDbType.Date).Value = dtpAfter.Value.Date; }
@@ -151,12 +153,17 @@ namespace PietieHostelManager
                 dgvBookings.DataSource = bookingsTable;
                 dgvBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
-                dgvRooms.Columns["BookingID"].Width = 80;
-                dgvRooms.Columns["Room#"].Width = 80;
-                dgvRooms.Columns["Full Name"].Width = 160;
-                dgvRooms.Columns["Phone"].Width = 120;
-                dgvRooms.Columns["Email"].Width = 240;
-                dgvRooms.Columns["Start Date"].Width = 80;
+                dgvBookings.Columns["BookingID"].Width = 80;
+                dgvBookings.Columns["Room#"].Width = 80;
+                dgvBookings.Columns["Full Name"].Width = 200;
+                dgvBookings.Columns["Phone"].Width = 88;
+                dgvBookings.Columns["Email"].Width = 350;
+                dgvBookings.Columns["Start Date"].Width = 100;
+                dgvBookings.Columns["End Date"].Width = 100;
+                dgvBookings.Columns["Price"].Width = 95;
+                dgvBookings.Columns["Total Price"].Width = 95;
+                dgvBookings.Columns["Payment Status"].Width = 120;
+                dgvBookings.Columns["Occupancy"].Width = 120;
             }
             catch (SqlException ex)
             {
@@ -171,17 +178,16 @@ namespace PietieHostelManager
 
         private void buttonCreateBooking_Click(object sender, EventArgs e)
         {
-            using (var createBooking = new CreateBooking())
-            {
-                createBooking.ShowDialog();
-            }
+            CreateBooking createBooking = new CreateBooking();
+            createBooking.Show();
+            this.Enabled = false;
         }
 
         private void buttonOpenAdmin_Click(object sender, EventArgs e)
         {
             Admin admin = new Admin();
             admin.Show();
-            this.Hide();
+            this.Enabled = false;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -223,6 +229,7 @@ namespace PietieHostelManager
         {
             UpdateRoomTypeFilter();
             LoadRoomsTable();
+            LoadBookingsTable();
         }
 
         private void cmbRoomType_SelectedIndexChanged(object sender, EventArgs e)
@@ -240,6 +247,42 @@ namespace PietieHostelManager
             cmbRoomStatus.SelectedIndex = 0;
             cmbRoomType.SelectedIndex = 0;
             LoadRoomsTable();
+        }
+
+        private void btnShowAllBookings_Click(object sender, EventArgs e)
+        {
+            dtpAfter.Checked = false;
+            dtpBefore.Checked = false;
+            cmbFilterBooking.SelectedIndex = 0;
+            txtSearchBox.Clear();
+            cmbPaymentStatus.SelectedIndex = 0;
+            cmbOccupancy.SelectedIndex = 0;
+            LoadBookingsTable();
+        }
+
+        private void cmbOccupancy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadBookingsTable();
+        }
+
+        private void cmbPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadBookingsTable();
+        }
+
+        private void btnSearchBookings_Click(object sender, EventArgs e)
+        {
+            LoadBookingsTable();
+        }
+
+        private void dtpBefore_ValueChanged(object sender, EventArgs e)
+        {
+            LoadBookingsTable();
+        }
+
+        private void dtpAfter_ValueChanged(object sender, EventArgs e)
+        {
+            LoadBookingsTable();
         }
     }
 }
