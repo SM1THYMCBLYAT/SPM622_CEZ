@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq.Expressions;
@@ -14,17 +15,11 @@ namespace PietieHostelManager
 {
     public partial class UserLogin : Form
     {
-        private readonly string connectionString =
-            @"Server=localhost;Database=HostelManagementSystem;Integrated Security=True;TrustServerCertificate=True;";
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["HostelDB"].ConnectionString;
+
         public UserLogin()
         {
             InitializeComponent();
-        }
-
-        private void UserLogin_Load(object sender, EventArgs e)
-        {
-            UserLoginTextPassword.PasswordChar = '*';
-            this.AcceptButton = UserLoginButtonLogin;
         }
 
         private string ComputeSha256Hash(string rawData)
@@ -45,106 +40,116 @@ namespace PietieHostelManager
             }
         }
 
-        private void LoginButtonCancel_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
-        private void UserLoginButtonLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = UserLoginTextUsername.Text.Trim();
-            string password = UserLoginTextPassword.Text;
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text;
 
             if (string.IsNullOrEmpty(username) ||
                 string.IsNullOrEmpty(password))
             {
                 MessageBox.Show(
                     "Please enter both username and password.",
-                    "Login Error",
+                    "Empty required fields",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Information);
                 return;
             }
+
             try
             {
-                string enteredPasswordHash = ComputeSha256Hash(password);
+                string hashedPassword = ComputeSha256Hash(password);
 
-                string storedPasswordHash;
-                string role;
+                var conn = new SqlConnection(connectionString);
+                var cmd = new SqlCommand(@"SELECT COUNT(*) FROM Users WHERE Username = @Username", conn);
 
-                using (SqlConnection connection =
-                    new SqlConnection(connectionString))
+                cmd.Parameters.AddWithValue("@Username", username);
+
+                conn.Open();
+                int iCount = (int)cmd.ExecuteScalar();
+
+                if (iCount == 0)
                 {
-                    string query = @"
-                        SELECT PasswordHash, Role
-                        FROM Users
-                        WHERE Username = @Username";
-                }
-            }
-
-
-
-            catch (SqlException)
-            {
-                MessageBox.Show(
-                    "An error occurred while connecting to the database. Please try again later.",
-                    "Database Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(
-                        "An unexpected error occurred. Please try again later.",
-                        "Login Error",
+                    MessageBox.Show(
+                        "Username not found",
+                        "Invalid Username",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
-            }
-        }
-        private void ShowInvalidLogin()
-        {
-            MessageBox.Show(
-                "Invalid username or password.",
-                "Login Error",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+                    return;
+                }
 
-            UserLoginTextPassword.Clear();
-            UserLoginTextPassword.Focus();
-        }
+                cmd = new SqlCommand(@"SELECT COUNT(*) FROM Users WHERE Password = @Password AND Username = @Username", conn);
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection connection =
-                       new SqlConnection(connectionString))
+                cmd.Parameters.AddWithValue("@Password", hashedPassword);
+                cmd.Parameters.AddWithValue("@Username", username);
+
+                iCount = (int)cmd.ExecuteScalar();
+
+                if (iCount == 0)
                 {
-                    connection.Open();
-
                     MessageBox.Show(
-                        "Database connection successful!",
-                        "Connection Test",
+                        "Incorrect password",
+                        "Invalid Password",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
+                cmd = new SqlCommand(@"SELECT COUNT(*) FROM Users WHERE Role = 'Admin' AND Username = @Username", conn);
+
+                cmd.Parameters.AddWithValue("@Username", username);
+
+                iCount = (int)cmd.ExecuteScalar();
+
+                if (iCount == 0)
+                {
+                    MainForm mainForm = new MainForm(username, "Staff");
+                    mainForm.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MainForm mainForm = new MainForm(username, "Admin");
+                    mainForm.Show();
+                    this.Hide();
                 }
             }
             catch (SqlException ex)
             {
                 MessageBox.Show(
-                    "Database connection failed.\n\n" + ex.Message,
-                    "Connection Error",
+                    "An error occurred while connecting to the database. Please try again later.\n\n" + ex,
+                    "Database Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "An unexpected error occurred.\n\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                        "An unexpected error occurred. Please try again later.\n\n" + ex,
+                        "Login Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
             }
+        }
+
+        private void UserLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+            txtPassword.PasswordChar = '\0';
+        }
+
+        private void btnShowPassword_MouseLeave(object sender, EventArgs e)
+        {
+            txtPassword.PasswordChar = '*';
         }
     }
 }

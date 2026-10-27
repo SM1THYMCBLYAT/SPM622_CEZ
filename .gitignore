@@ -7,3 +7,4 @@
 
 # User-specific Visual Studio settings
 *.csproj.user
+**/App.config

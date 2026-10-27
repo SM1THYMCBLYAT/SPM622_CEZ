@@ -8,20 +8,11 @@ namespace PietieHostelManager
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-            using (var login = new UserLogin())
-            {
-                if (login.ShowDialog() == DialogResult.OK)
-                {
-                    Application.Run(new MainForm());
-                }
-            }
-                //Application.Run(new UserLogin());
-
-            //MainForm mainForm = new MainForm();
+            // Start with the login form
+            Application.Run(new UserLogin());
         }
     }
 }

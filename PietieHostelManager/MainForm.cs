@@ -1,20 +1,20 @@
+using System.ComponentModel;
+
 namespace PietieHostelManager
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string User { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string UserRole { get; set; }
+        public MainForm(string username, string userRole)
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
+            User = username;
+            UserRole = userRole;
         }
 
         private void buttonCreateBooking_Click(object sender, EventArgs e)
@@ -31,6 +31,11 @@ namespace PietieHostelManager
             {
                 openAdmin.ShowDialog();
             }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
