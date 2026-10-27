@@ -178,7 +178,7 @@ namespace PietieHostelManager
 
         private void buttonCreateBooking_Click(object sender, EventArgs e)
         {
-            CreateBooking createBooking = new CreateBooking();
+            CreateBookingForm createBooking = new CreateBookingForm();
             createBooking.Show();
             this.Enabled = false;
         }
