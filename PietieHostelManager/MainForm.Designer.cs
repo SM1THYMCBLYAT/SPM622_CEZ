@@ -28,703 +28,490 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonCreateBooking = new Button();
-            button2 = new Button();
-            label3 = new Label();
-            label4 = new Label();
-            button9 = new Button();
-            label1 = new Label();
-            button3 = new Button();
-            buttonOpenAdmin = new Button();
-            label2 = new Label();
-            textBox1 = new TextBox();
-            button5 = new Button();
-            label5 = new Label();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            button6 = new Button();
-            comboBox4 = new ComboBox();
-            label6 = new Label();
-            textBox2 = new TextBox();
-            label7 = new Label();
-            label8 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
-            comboBox5 = new ComboBox();
-            comboBox6 = new ComboBox();
-            dataGridView1 = new DataGridView();
-            RoomTableRoomID = new DataGridViewTextBoxColumn();
-            RoomtableRoomStatus = new DataGridViewTextBoxColumn();
-            RoomTableRoomType = new DataGridViewTextBoxColumn();
-            RoomTableRoomOccupants = new DataGridViewTextBoxColumn();
-            dataGridView2 = new DataGridView();
-            GuestTableGuestID = new DataGridViewTextBoxColumn();
-            GuestTableRoomNumber = new DataGridViewTextBoxColumn();
-            GuestTableFullName = new DataGridViewTextBoxColumn();
-            GuestTablePhoneNumber = new DataGridViewTextBoxColumn();
-            GuestTableEmail = new DataGridViewTextBoxColumn();
-            GuestTableStartDate = new DataGridViewTextBoxColumn();
-            GuestTableEndDate = new DataGridViewTextBoxColumn();
-            GuestTablePrice = new DataGridViewTextBoxColumn();
-            GuestTablePayment = new DataGridViewTextBoxColumn();
-            GuestTableOccupancy = new DataGridViewTextBoxColumn();
-            comboBox7 = new ComboBox();
-            MainFormTableLayout = new TableLayoutPanel();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            panel3 = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            panel4 = new Panel();
-            tableLayoutPanel3 = new TableLayoutPanel();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             panel1 = new Panel();
+            btnManageBooking = new Button();
+            imageList1 = new ImageList(components);
+            btnCreateBooking = new Button();
+            button1 = new Button();
+            dtpBefore = new DateTimePicker();
+            label8 = new Label();
+            label7 = new Label();
+            dtpAfter = new DateTimePicker();
+            label6 = new Label();
+            buttonOpenAdmin = new Button();
+            btnSignOut = new Button();
+            panel4 = new Panel();
+            lblUsername = new Label();
             panel2 = new Panel();
-            panel9 = new Panel();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            panel6 = new Panel();
-            panel7 = new Panel();
-            panel8 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            MainFormTableLayout.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
-            panel3.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            panel4.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
+            btnShowAllRooms = new Button();
+            label2 = new Label();
+            label1 = new Label();
+            cmbRoomType = new ComboBox();
+            cmbRoomStatus = new ComboBox();
+            dgvRooms = new DataGridView();
+            panel3 = new Panel();
+            btnShowAllBookings = new Button();
+            btnSearchBookings = new Button();
+            imageList2 = new ImageList(components);
+            txtSearchBox = new TextBox();
+            label5 = new Label();
+            cmbFilterBooking = new ComboBox();
+            label4 = new Label();
+            cmbPaymentStatus = new ComboBox();
+            label3 = new Label();
+            cmbOccupancy = new ComboBox();
+            dgvBookings = new DataGridView();
             panel1.SuspendLayout();
+            panel4.SuspendLayout();
             panel2.SuspendLayout();
-            panel9.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
-            panel6.SuspendLayout();
-            panel7.SuspendLayout();
-            panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRooms).BeginInit();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBookings).BeginInit();
             SuspendLayout();
             // 
-            // buttonCreateBooking
+            // panel1
             // 
-            buttonCreateBooking.Location = new Point(3, 2);
-            buttonCreateBooking.Margin = new Padding(3, 2, 3, 2);
-            buttonCreateBooking.Name = "buttonCreateBooking";
-            buttonCreateBooking.Size = new Size(104, 68);
-            buttonCreateBooking.TabIndex = 4;
-            buttonCreateBooking.Text = "Create Booking";
-            buttonCreateBooking.UseVisualStyleBackColor = true;
-            buttonCreateBooking.Click += buttonCreateBooking_Click;
+            panel1.BackColor = Color.LightCyan;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(btnManageBooking);
+            panel1.Controls.Add(btnCreateBooking);
+            panel1.Controls.Add(button1);
+            panel1.Controls.Add(dtpBefore);
+            panel1.Controls.Add(label8);
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(dtpAfter);
+            panel1.Controls.Add(label6);
+            panel1.Controls.Add(buttonOpenAdmin);
+            panel1.Controls.Add(btnSignOut);
+            panel1.Controls.Add(panel4);
+            panel1.Location = new Point(5, 5);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1910, 206);
+            panel1.TabIndex = 0;
             // 
-            // button2
+            // btnManageBooking
             // 
-            button2.Location = new Point(112, 2);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(109, 68);
-            button2.TabIndex = 5;
-            button2.Text = "Manage Guest/Bookings";
-            button2.UseVisualStyleBackColor = true;
+            btnManageBooking.Font = new Font("Segoe UI", 11F);
+            btnManageBooking.ImageAlign = ContentAlignment.TopCenter;
+            btnManageBooking.ImageKey = "pngtree-vector-plus-icon-png-image_1024584.jpg";
+            btnManageBooking.ImageList = imageList1;
+            btnManageBooking.Location = new Point(220, 52);
+            btnManageBooking.Name = "btnManageBooking";
+            btnManageBooking.Size = new Size(133, 141);
+            btnManageBooking.TabIndex = 11;
+            btnManageBooking.Text = "Manage Guest/Booking";
+            btnManageBooking.TextAlign = ContentAlignment.BottomCenter;
+            btnManageBooking.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // imageList1
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 2);
-            label3.Name = "label3";
-            label3.Size = new Size(55, 15);
-            label3.TabIndex = 12;
-            label3.Text = "REPORTS";
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "347895.png");
+            imageList1.Images.SetKeyName(1, "pngtree-vector-plus-icon-png-image_1024584.jpg");
             // 
-            // label4
+            // btnCreateBooking
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(3, 62);
-            label4.Name = "label4";
-            label4.Size = new Size(223, 15);
-            label4.TabIndex = 13;
-            label4.Text = "(Creates report of Displayed guests table)";
+            btnCreateBooking.Font = new Font("Segoe UI", 11F);
+            btnCreateBooking.ImageAlign = ContentAlignment.TopCenter;
+            btnCreateBooking.ImageKey = "pngtree-vector-plus-icon-png-image_1024584.jpg";
+            btnCreateBooking.ImageList = imageList1;
+            btnCreateBooking.Location = new Point(37, 51);
+            btnCreateBooking.Name = "btnCreateBooking";
+            btnCreateBooking.Size = new Size(133, 141);
+            btnCreateBooking.TabIndex = 10;
+            btnCreateBooking.Text = "Add Guest/Booking";
+            btnCreateBooking.TextAlign = ContentAlignment.BottomCenter;
+            btnCreateBooking.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // button1
             // 
-            button9.Location = new Point(0, 38);
-            button9.Margin = new Padding(3, 2, 3, 2);
-            button9.Name = "button9";
-            button9.Size = new Size(115, 22);
-            button9.TabIndex = 14;
-            button9.Text = "Create Report";
-            button9.UseVisualStyleBackColor = true;
+            button1.Location = new Point(707, 236);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 9;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // dtpBefore
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(41, 21);
-            label1.Name = "label1";
-            label1.Size = new Size(60, 15);
-            label1.TabIndex = 15;
-            label1.Text = "Username";
-            // 
-            // button3
-            // 
-            button3.Location = new Point(32, 38);
-            button3.Margin = new Padding(3, 2, 3, 2);
-            button3.Name = "button3";
-            button3.Size = new Size(82, 22);
-            button3.TabIndex = 16;
-            button3.Text = "Sign out";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // buttonOpenAdmin
-            // 
-            buttonOpenAdmin.Location = new Point(146, 2);
-            buttonOpenAdmin.Margin = new Padding(3, 2, 3, 2);
-            buttonOpenAdmin.Name = "buttonOpenAdmin";
-            buttonOpenAdmin.Size = new Size(85, 74);
-            buttonOpenAdmin.TabIndex = 17;
-            buttonOpenAdmin.Text = "Open Admin Panel";
-            buttonOpenAdmin.UseVisualStyleBackColor = true;
-            buttonOpenAdmin.Click += buttonOpenAdmin_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(3, 4);
-            label2.Name = "label2";
-            label2.Size = new Size(54, 15);
-            label2.TabIndex = 18;
-            label2.Text = "Number:";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(66, 2);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(79, 23);
-            textBox1.TabIndex = 19;
-            // 
-            // button5
-            // 
-            button5.Location = new Point(152, 2);
-            button5.Margin = new Padding(3, 2, 3, 2);
-            button5.Name = "button5";
-            button5.Size = new Size(69, 22);
-            button5.TabIndex = 20;
-            button5.Text = "Show All";
-            button5.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(3, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(36, 15);
-            label5.TabIndex = 21;
-            label5.Text = "Filter:";
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(45, 2);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(64, 23);
-            comboBox1.TabIndex = 22;
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(115, 2);
-            comboBox2.Margin = new Padding(3, 2, 3, 2);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(65, 23);
-            comboBox2.TabIndex = 23;
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(186, 2);
-            comboBox3.Margin = new Padding(3, 2, 3, 2);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(64, 23);
-            comboBox3.TabIndex = 24;
-            // 
-            // button6
-            // 
-            button6.Location = new Point(3, 2);
-            button6.Margin = new Padding(3, 2, 3, 2);
-            button6.Name = "button6";
-            button6.Size = new Size(67, 21);
-            button6.TabIndex = 25;
-            button6.Text = "Show All";
-            button6.UseVisualStyleBackColor = true;
-            // 
-            // comboBox4
-            // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(256, 2);
-            comboBox4.Margin = new Padding(3, 2, 3, 2);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(55, 23);
-            comboBox4.TabIndex = 26;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(175, 4);
-            label6.Name = "label6";
-            label6.Size = new Size(10, 15);
-            label6.TabIndex = 27;
-            label6.Text = ":";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(191, 3);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(191, 23);
-            textBox2.TabIndex = 28;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(3, 5);
-            label7.Name = "label7";
-            label7.Size = new Size(38, 15);
-            label7.TabIndex = 29;
-            label7.Text = "From:";
+            dtpBefore.CustomFormat = "yyyy-MM-dd";
+            dtpBefore.Format = DateTimePickerFormat.Custom;
+            dtpBefore.Location = new Point(457, 144);
+            dtpBefore.Name = "dtpBefore";
+            dtpBefore.ShowCheckBox = true;
+            dtpBefore.Size = new Size(200, 23);
+            dtpBefore.TabIndex = 8;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(131, 5);
+            label8.Font = new Font("Segoe UI", 10F);
+            label8.Location = new Point(457, 122);
             label8.Name = "label8";
-            label8.Size = new Size(20, 15);
-            label8.TabIndex = 30;
-            label8.Text = "To";
+            label8.Size = new Size(51, 19);
+            label8.TabIndex = 7;
+            label8.Text = "Before:";
             // 
-            // dateTimePicker1
+            // label7
             // 
-            dateTimePicker1.Location = new Point(48, 4);
-            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(78, 23);
-            dateTimePicker1.TabIndex = 32;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10F);
+            label7.Location = new Point(457, 52);
+            label7.Name = "label7";
+            label7.Size = new Size(42, 19);
+            label7.TabIndex = 6;
+            label7.Text = "After:";
             // 
-            // dateTimePicker2
+            // dtpAfter
             // 
-            dateTimePicker2.Location = new Point(158, 5);
-            dateTimePicker2.Margin = new Padding(3, 2, 3, 2);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(81, 23);
-            dateTimePicker2.TabIndex = 33;
+            dtpAfter.CustomFormat = "yyyy-MM-dd";
+            dtpAfter.Format = DateTimePickerFormat.Custom;
+            dtpAfter.Location = new Point(457, 74);
+            dtpAfter.Name = "dtpAfter";
+            dtpAfter.ShowCheckBox = true;
+            dtpAfter.Size = new Size(200, 23);
+            dtpAfter.TabIndex = 4;
             // 
-            // comboBox5
+            // label6
             // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(3, 2);
-            comboBox5.Margin = new Padding(3, 2, 3, 2);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(95, 23);
-            comboBox5.TabIndex = 34;
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            label6.Location = new Point(457, 14);
+            label6.Name = "label6";
+            label6.Size = new Size(173, 20);
+            label6.TabIndex = 3;
+            label6.Text = "Filter bookings by date:";
             // 
-            // comboBox6
+            // buttonOpenAdmin
             // 
-            comboBox6.FormattingEnabled = true;
-            comboBox6.Location = new Point(102, 2);
-            comboBox6.Margin = new Padding(3, 2, 3, 2);
-            comboBox6.Name = "comboBox6";
-            comboBox6.Size = new Size(95, 23);
-            comboBox6.TabIndex = 35;
+            buttonOpenAdmin.Font = new Font("Segoe UI", 12F);
+            buttonOpenAdmin.ImageAlign = ContentAlignment.TopCenter;
+            buttonOpenAdmin.ImageKey = "347895.png";
+            buttonOpenAdmin.ImageList = imageList1;
+            buttonOpenAdmin.Location = new Point(1750, 106);
+            buttonOpenAdmin.Name = "buttonOpenAdmin";
+            buttonOpenAdmin.Size = new Size(118, 86);
+            buttonOpenAdmin.TabIndex = 2;
+            buttonOpenAdmin.Text = "Admin Panel";
+            buttonOpenAdmin.TextAlign = ContentAlignment.BottomCenter;
+            buttonOpenAdmin.UseVisualStyleBackColor = true;
+            buttonOpenAdmin.Click += buttonOpenAdmin_Click;
             // 
-            // dataGridView1
+            // btnSignOut
             // 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { RoomTableRoomID, RoomtableRoomStatus, RoomTableRoomType, RoomTableRoomOccupants });
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 152);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(560, 355);
-            dataGridView1.TabIndex = 0;
-            // 
-            // RoomTableRoomID
-            // 
-            RoomTableRoomID.HeaderText = "ID";
-            RoomTableRoomID.MinimumWidth = 6;
-            RoomTableRoomID.Name = "RoomTableRoomID";
-            // 
-            // RoomtableRoomStatus
-            // 
-            RoomtableRoomStatus.HeaderText = "Status";
-            RoomtableRoomStatus.MinimumWidth = 6;
-            RoomtableRoomStatus.Name = "RoomtableRoomStatus";
-            // 
-            // RoomTableRoomType
-            // 
-            RoomTableRoomType.HeaderText = "Type";
-            RoomTableRoomType.MinimumWidth = 6;
-            RoomTableRoomType.Name = "RoomTableRoomType";
-            // 
-            // RoomTableRoomOccupants
-            // 
-            RoomTableRoomOccupants.HeaderText = "Occupants";
-            RoomTableRoomOccupants.MinimumWidth = 6;
-            RoomTableRoomOccupants.Name = "RoomTableRoomOccupants";
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { GuestTableGuestID, GuestTableRoomNumber, GuestTableFullName, GuestTablePhoneNumber, GuestTableEmail, GuestTableStartDate, GuestTableEndDate, GuestTablePrice, GuestTablePayment, GuestTableOccupancy });
-            dataGridView2.Dock = DockStyle.Fill;
-            dataGridView2.Location = new Point(569, 152);
-            dataGridView2.Margin = new Padding(3, 2, 3, 2);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(1047, 355);
-            dataGridView2.TabIndex = 1;
-            // 
-            // GuestTableGuestID
-            // 
-            GuestTableGuestID.HeaderText = "GuestID";
-            GuestTableGuestID.MinimumWidth = 6;
-            GuestTableGuestID.Name = "GuestTableGuestID";
-            // 
-            // GuestTableRoomNumber
-            // 
-            GuestTableRoomNumber.HeaderText = "RoomNumber";
-            GuestTableRoomNumber.MinimumWidth = 6;
-            GuestTableRoomNumber.Name = "GuestTableRoomNumber";
-            // 
-            // GuestTableFullName
-            // 
-            GuestTableFullName.HeaderText = "Full Name";
-            GuestTableFullName.MinimumWidth = 6;
-            GuestTableFullName.Name = "GuestTableFullName";
-            // 
-            // GuestTablePhoneNumber
-            // 
-            GuestTablePhoneNumber.HeaderText = "Phone Number";
-            GuestTablePhoneNumber.MinimumWidth = 6;
-            GuestTablePhoneNumber.Name = "GuestTablePhoneNumber";
-            // 
-            // GuestTableEmail
-            // 
-            GuestTableEmail.HeaderText = "Email";
-            GuestTableEmail.MinimumWidth = 6;
-            GuestTableEmail.Name = "GuestTableEmail";
-            // 
-            // GuestTableStartDate
-            // 
-            GuestTableStartDate.HeaderText = "Start Date";
-            GuestTableStartDate.MinimumWidth = 6;
-            GuestTableStartDate.Name = "GuestTableStartDate";
-            // 
-            // GuestTableEndDate
-            // 
-            GuestTableEndDate.HeaderText = "End Date";
-            GuestTableEndDate.MinimumWidth = 6;
-            GuestTableEndDate.Name = "GuestTableEndDate";
-            // 
-            // GuestTablePrice
-            // 
-            GuestTablePrice.HeaderText = "Price";
-            GuestTablePrice.MinimumWidth = 6;
-            GuestTablePrice.Name = "GuestTablePrice";
-            // 
-            // GuestTablePayment
-            // 
-            GuestTablePayment.HeaderText = "Payment";
-            GuestTablePayment.MinimumWidth = 6;
-            GuestTablePayment.Name = "GuestTablePayment";
-            // 
-            // GuestTableOccupancy
-            // 
-            GuestTableOccupancy.HeaderText = "Occupancy";
-            GuestTableOccupancy.MinimumWidth = 6;
-            GuestTableOccupancy.Name = "GuestTableOccupancy";
-            // 
-            // comboBox7
-            // 
-            comboBox7.FormattingEnabled = true;
-            comboBox7.Location = new Point(75, 2);
-            comboBox7.Margin = new Padding(3, 2, 3, 2);
-            comboBox7.Name = "comboBox7";
-            comboBox7.Size = new Size(95, 23);
-            comboBox7.TabIndex = 40;
-            // 
-            // MainFormTableLayout
-            // 
-            MainFormTableLayout.BackColor = SystemColors.HotTrack;
-            MainFormTableLayout.ColumnCount = 2;
-            MainFormTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            MainFormTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
-            MainFormTableLayout.Controls.Add(dataGridView1, 0, 1);
-            MainFormTableLayout.Controls.Add(dataGridView2, 1, 1);
-            MainFormTableLayout.Controls.Add(tableLayoutPanel2, 0, 0);
-            MainFormTableLayout.Controls.Add(tableLayoutPanel3, 1, 0);
-            MainFormTableLayout.Dock = DockStyle.Fill;
-            MainFormTableLayout.Location = new Point(0, 0);
-            MainFormTableLayout.Margin = new Padding(3, 2, 3, 2);
-            MainFormTableLayout.Name = "MainFormTableLayout";
-            MainFormTableLayout.RowCount = 2;
-            MainFormTableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
-            MainFormTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            MainFormTableLayout.Size = new Size(1619, 509);
-            MainFormTableLayout.TabIndex = 41;
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.BackColor = SystemColors.HotTrack;
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 18F));
-            tableLayoutPanel2.Controls.Add(panel3, 0, 0);
-            tableLayoutPanel2.Controls.Add(flowLayoutPanel1, 0, 2);
-            tableLayoutPanel2.Controls.Add(panel4, 0, 1);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 2);
-            tableLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 3;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel2.Size = new Size(560, 146);
-            tableLayoutPanel2.TabIndex = 2;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(buttonCreateBooking);
-            panel3.Controls.Add(button2);
-            panel3.Location = new Point(3, 2);
-            panel3.Margin = new Padding(3, 2, 3, 2);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(502, 75);
-            panel3.TabIndex = 42;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flowLayoutPanel1.Controls.Add(label5);
-            flowLayoutPanel1.Controls.Add(comboBox1);
-            flowLayoutPanel1.Controls.Add(comboBox2);
-            flowLayoutPanel1.Controls.Add(comboBox3);
-            flowLayoutPanel1.Controls.Add(comboBox4);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(3, 118);
-            flowLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(554, 26);
-            flowLayoutPanel1.TabIndex = 45;
-            flowLayoutPanel1.WrapContents = false;
+            btnSignOut.Font = new Font("Segoe UI", 17F);
+            btnSignOut.Location = new Point(1709, 50);
+            btnSignOut.Name = "btnSignOut";
+            btnSignOut.Size = new Size(200, 42);
+            btnSignOut.TabIndex = 1;
+            btnSignOut.Text = "Sign out";
+            btnSignOut.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
-            panel4.AutoSize = true;
-            panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel4.Controls.Add(label2);
-            panel4.Controls.Add(textBox1);
-            panel4.Controls.Add(button5);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(3, 89);
-            panel4.Margin = new Padding(3, 2, 3, 2);
+            panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(lblUsername);
+            panel4.Location = new Point(1709, -1);
             panel4.Name = "panel4";
-            panel4.Size = new Size(554, 25);
-            panel4.TabIndex = 43;
+            panel4.Size = new Size(200, 45);
+            panel4.TabIndex = 0;
             // 
-            // tableLayoutPanel3
+            // lblUsername
             // 
-            tableLayoutPanel3.BackColor = SystemColors.HotTrack;
-            tableLayoutPanel3.ColumnCount = 1;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 18F));
-            tableLayoutPanel3.Controls.Add(panel1, 0, 0);
-            tableLayoutPanel3.Controls.Add(flowLayoutPanel2, 0, 1);
-            tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(569, 2);
-            tableLayoutPanel3.Margin = new Padding(3, 2, 3, 2);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 2;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel3.Size = new Size(1047, 146);
-            tableLayoutPanel3.TabIndex = 3;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.HotTrack;
-            panel1.Controls.Add(panel2);
-            panel1.Controls.Add(panel9);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 2);
-            panel1.Margin = new Padding(3, 2, 3, 2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1041, 112);
-            panel1.TabIndex = 0;
+            lblUsername.AutoSize = true;
+            lblUsername.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblUsername.Location = new Point(16, 9);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(98, 25);
+            lblUsername.TabIndex = 0;
+            lblUsername.Text = "HolyChris";
             // 
             // panel2
             // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            panel2.Controls.Add(buttonOpenAdmin);
-            panel2.Controls.Add(button3);
+            panel2.BackColor = Color.LightCyan;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(btnShowAllRooms);
+            panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(805, 2);
-            panel2.Margin = new Padding(3, 2, 3, 2);
+            panel2.Controls.Add(cmbRoomType);
+            panel2.Controls.Add(cmbRoomStatus);
+            panel2.Controls.Add(dgvRooms);
+            panel2.Location = new Point(5, 217);
             panel2.Name = "panel2";
-            panel2.Size = new Size(234, 86);
-            panel2.TabIndex = 41;
+            panel2.Size = new Size(448, 833);
+            panel2.TabIndex = 1;
             // 
-            // panel9
+            // btnShowAllRooms
             // 
-            panel9.Controls.Add(label3);
-            panel9.Controls.Add(button9);
-            panel9.Controls.Add(label4);
-            panel9.Location = new Point(95, 6);
-            panel9.Margin = new Padding(3, 2, 3, 2);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(283, 94);
-            panel9.TabIndex = 48;
+            btnShowAllRooms.Font = new Font("Segoe UI", 11F);
+            btnShowAllRooms.Location = new Point(359, 23);
+            btnShowAllRooms.Name = "btnShowAllRooms";
+            btnShowAllRooms.Size = new Size(84, 36);
+            btnShowAllRooms.TabIndex = 12;
+            btnShowAllRooms.Text = "Show All";
+            btnShowAllRooms.UseVisualStyleBackColor = true;
+            btnShowAllRooms.Click += btnShowAllRooms_Click;
             // 
-            // flowLayoutPanel2
+            // label2
             // 
-            flowLayoutPanel2.Controls.Add(panel6);
-            flowLayoutPanel2.Controls.Add(panel7);
-            flowLayoutPanel2.Controls.Add(panel8);
-            flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.Location = new Point(3, 118);
-            flowLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(1041, 26);
-            flowLayoutPanel2.TabIndex = 1;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label2.Location = new Point(176, 5);
+            label2.Name = "label2";
+            label2.Size = new Size(72, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Room Type:";
             // 
-            // panel6
+            // label1
             // 
-            panel6.AutoSize = true;
-            panel6.Controls.Add(button6);
-            panel6.Controls.Add(comboBox7);
-            panel6.Controls.Add(label6);
-            panel6.Controls.Add(textBox2);
-            panel6.Location = new Point(3, 2);
-            panel6.Margin = new Padding(3, 2, 3, 2);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(385, 28);
-            panel6.TabIndex = 45;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.Location = new Point(6, 5);
+            label1.Name = "label1";
+            label1.Size = new Size(81, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Room Status:";
             // 
-            // panel7
+            // cmbRoomType
             // 
-            panel7.AutoSize = true;
-            panel7.Controls.Add(label7);
-            panel7.Controls.Add(dateTimePicker2);
-            panel7.Controls.Add(dateTimePicker1);
-            panel7.Controls.Add(label8);
-            panel7.Location = new Point(394, 2);
-            panel7.Margin = new Padding(3, 2, 3, 2);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(242, 30);
-            panel7.TabIndex = 46;
+            cmbRoomType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRoomType.Font = new Font("Segoe UI", 16F);
+            cmbRoomType.FormattingEnabled = true;
+            cmbRoomType.Location = new Point(176, 23);
+            cmbRoomType.Name = "cmbRoomType";
+            cmbRoomType.Size = new Size(164, 38);
+            cmbRoomType.TabIndex = 2;
+            cmbRoomType.SelectedIndexChanged += cmbRoomType_SelectedIndexChanged;
             // 
-            // panel8
+            // cmbRoomStatus
             // 
-            panel8.AutoSize = true;
-            panel8.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel8.Controls.Add(comboBox5);
-            panel8.Controls.Add(comboBox6);
-            panel8.Location = new Point(642, 2);
-            panel8.Margin = new Padding(3, 2, 3, 2);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(200, 27);
-            panel8.TabIndex = 47;
+            cmbRoomStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRoomStatus.Font = new Font("Segoe UI", 16F);
+            cmbRoomStatus.FormattingEnabled = true;
+            cmbRoomStatus.Items.AddRange(new object[] { "", "Vacant", "Occupied", "Full", "Unavailable" });
+            cmbRoomStatus.Location = new Point(6, 23);
+            cmbRoomStatus.Name = "cmbRoomStatus";
+            cmbRoomStatus.Size = new Size(164, 38);
+            cmbRoomStatus.TabIndex = 1;
+            cmbRoomStatus.SelectedIndexChanged += cmbRoomStatus_SelectedIndexChanged;
+            // 
+            // dgvRooms
+            // 
+            dgvRooms.AllowUserToAddRows = false;
+            dgvRooms.AllowUserToDeleteRows = false;
+            dgvRooms.AllowUserToResizeColumns = false;
+            dgvRooms.AllowUserToResizeRows = false;
+            dgvRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRooms.Location = new Point(3, 61);
+            dgvRooms.MultiSelect = false;
+            dgvRooms.Name = "dgvRooms";
+            dgvRooms.ReadOnly = true;
+            dgvRooms.RowHeadersVisible = false;
+            dgvRooms.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRooms.Size = new Size(440, 767);
+            dgvRooms.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.LightCyan;
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(btnShowAllBookings);
+            panel3.Controls.Add(btnSearchBookings);
+            panel3.Controls.Add(txtSearchBox);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(cmbFilterBooking);
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(cmbPaymentStatus);
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(cmbOccupancy);
+            panel3.Controls.Add(dgvBookings);
+            panel3.Location = new Point(459, 217);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1456, 833);
+            panel3.TabIndex = 2;
+            // 
+            // btnShowAllBookings
+            // 
+            btnShowAllBookings.Font = new Font("Segoe UI", 11F);
+            btnShowAllBookings.Location = new Point(1367, 23);
+            btnShowAllBookings.Name = "btnShowAllBookings";
+            btnShowAllBookings.Size = new Size(84, 36);
+            btnShowAllBookings.TabIndex = 11;
+            btnShowAllBookings.Text = "Show All";
+            btnShowAllBookings.UseVisualStyleBackColor = true;
+            // 
+            // btnSearchBookings
+            // 
+            btnSearchBookings.ImageKey = "search-icon-png-5.png";
+            btnSearchBookings.ImageList = imageList2;
+            btnSearchBookings.Location = new Point(961, 23);
+            btnSearchBookings.Name = "btnSearchBookings";
+            btnSearchBookings.Size = new Size(40, 36);
+            btnSearchBookings.TabIndex = 10;
+            btnSearchBookings.UseVisualStyleBackColor = true;
+            // 
+            // imageList2
+            // 
+            imageList2.ColorDepth = ColorDepth.Depth32Bit;
+            imageList2.ImageStream = (ImageListStreamer)resources.GetObject("imageList2.ImageStream");
+            imageList2.TransparentColor = Color.Transparent;
+            imageList2.Images.SetKeyName(0, "search-icon-png-5.png");
+            // 
+            // txtSearchBox
+            // 
+            txtSearchBox.Font = new Font("Segoe UI", 16F);
+            txtSearchBox.Location = new Point(209, 24);
+            txtSearchBox.Name = "txtSearchBox";
+            txtSearchBox.Size = new Size(746, 36);
+            txtSearchBox.TabIndex = 9;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label5.Location = new Point(17, 5);
+            label5.Name = "label5";
+            label5.Size = new Size(94, 15);
+            label5.TabIndex = 8;
+            label5.Text = "Filter search by:";
+            // 
+            // cmbFilterBooking
+            // 
+            cmbFilterBooking.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFilterBooking.Font = new Font("Segoe UI", 16F);
+            cmbFilterBooking.FormattingEnabled = true;
+            cmbFilterBooking.Items.AddRange(new object[] { "Booking ID", "Room Number", "Full Name", "Phone", "Email" });
+            cmbFilterBooking.Location = new Point(17, 23);
+            cmbFilterBooking.Name = "cmbFilterBooking";
+            cmbFilterBooking.Size = new Size(176, 38);
+            cmbFilterBooking.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label4.Location = new Point(1021, 5);
+            label4.Name = "label4";
+            label4.Size = new Size(97, 15);
+            label4.TabIndex = 6;
+            label4.Text = "Payment Status:";
+            // 
+            // cmbPaymentStatus
+            // 
+            cmbPaymentStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPaymentStatus.Font = new Font("Segoe UI", 16F);
+            cmbPaymentStatus.FormattingEnabled = true;
+            cmbPaymentStatus.Items.AddRange(new object[] { "", "Pending", "Paid" });
+            cmbPaymentStatus.Location = new Point(1021, 23);
+            cmbPaymentStatus.Name = "cmbPaymentStatus";
+            cmbPaymentStatus.Size = new Size(164, 38);
+            cmbPaymentStatus.TabIndex = 5;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label3.Location = new Point(1197, 5);
+            label3.Name = "label3";
+            label3.Size = new Size(106, 15);
+            label3.TabIndex = 4;
+            label3.Text = "Guest Occupancy:";
+            // 
+            // cmbOccupancy
+            // 
+            cmbOccupancy.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbOccupancy.Font = new Font("Segoe UI", 16F);
+            cmbOccupancy.FormattingEnabled = true;
+            cmbOccupancy.Items.AddRange(new object[] { "", "Checked In", "Checked Out", "Pending", "Cancelled" });
+            cmbOccupancy.Location = new Point(1197, 23);
+            cmbOccupancy.Name = "cmbOccupancy";
+            cmbOccupancy.Size = new Size(164, 38);
+            cmbOccupancy.TabIndex = 3;
+            // 
+            // dgvBookings
+            // 
+            dgvBookings.AllowUserToAddRows = false;
+            dgvBookings.AllowUserToDeleteRows = false;
+            dgvBookings.AllowUserToResizeColumns = false;
+            dgvBookings.AllowUserToResizeRows = false;
+            dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBookings.Location = new Point(3, 61);
+            dgvBookings.MultiSelect = false;
+            dgvBookings.Name = "dgvBookings";
+            dgvBookings.ReadOnly = true;
+            dgvBookings.RowHeadersVisible = false;
+            dgvBookings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBookings.Size = new Size(1448, 767);
+            dgvBookings.TabIndex = 1;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1619, 509);
-            Controls.Add(MainFormTableLayout);
+            BackColor = Color.SteelBlue;
+            ClientSize = new Size(1924, 1061);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 2, 3, 2);
+            MaximizeBox = false;
             Name = "MainForm";
             Text = "Hostel Manager";
             WindowState = FormWindowState.Maximized;
             FormClosed += MainForm_FormClosed;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            MainFormTableLayout.ResumeLayout(false);
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
+            Shown += MainForm_Shown;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            tableLayoutPanel3.ResumeLayout(false);
-            panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            panel9.ResumeLayout(false);
-            panel9.PerformLayout();
-            flowLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanel2.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            panel8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvRooms).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBookings).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private Button buttonCreateBooking;
-        private Button button2;
-        private Label label3;
-        private Label label4;
-        private Button button9;
-        private Label label1;
-        private Button button3;
-        private Button buttonOpenAdmin;
-        private Label label2;
-        private TextBox textBox1;
-        private Button button5;
-        private Label label5;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private Button button6;
-        private ComboBox comboBox4;
-        private Label label6;
-        private TextBox textBox2;
-        private Label label7;
-        private Label label8;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
-        private ComboBox comboBox5;
-        private ComboBox comboBox6;
-        private ComboBox comboBox7;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn RoomTableRoomID;
-        private DataGridViewTextBoxColumn RoomtableRoomStatus;
-        private DataGridViewTextBoxColumn RoomTableRoomType;
-        private DataGridViewTextBoxColumn RoomTableRoomOccupants;
-        private DataGridView dataGridView2;
-        private TableLayoutPanel MainFormTableLayout;
+
+        private Panel panel1;
         private Panel panel2;
         private Panel panel3;
+        private DataGridView dgvRooms;
+        private DataGridView dgvBookings;
         private Panel panel4;
-        private Panel panel6;
-        private Panel panel7;
-        private Panel panel8;
-        private Panel panel9;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
-        private TableLayoutPanel tableLayoutPanel3;
-        private Panel panel1;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private DataGridViewTextBoxColumn GuestTableGuestID;
-        private DataGridViewTextBoxColumn GuestTableRoomNumber;
-        private DataGridViewTextBoxColumn GuestTableFullName;
-        private DataGridViewTextBoxColumn GuestTablePhoneNumber;
-        private DataGridViewTextBoxColumn GuestTableEmail;
-        private DataGridViewTextBoxColumn GuestTableStartDate;
-        private DataGridViewTextBoxColumn GuestTableEndDate;
-        private DataGridViewTextBoxColumn GuestTablePrice;
-        private DataGridViewTextBoxColumn GuestTablePayment;
-        private DataGridViewTextBoxColumn GuestTableOccupancy;
+        private Button buttonOpenAdmin;
+        private Button btnSignOut;
+        private Label lblUsername;
+        private ImageList imageList1;
+        private ComboBox cmbRoomType;
+        private ComboBox cmbRoomStatus;
+        private Label label1;
+        private ComboBox cmbOccupancy;
+        private Label label2;
+        private Label label4;
+        private ComboBox cmbPaymentStatus;
+        private Label label3;
+        private ComboBox cmbFilterBooking;
+        private Button btnSearchBookings;
+        private ImageList imageList2;
+        private TextBox txtSearchBox;
+        private Label label5;
+        private DateTimePicker dtpBefore;
+        private Label label8;
+        private Label label7;
+        private DateTimePicker dtpAfter;
+        private Label label6;
+        private Button btnShowAllRooms;
+        private Button btnShowAllBookings;
+        private Button btnManageBooking;
+        private Button btnCreateBooking;
+        private Button button1;
     }
 }
