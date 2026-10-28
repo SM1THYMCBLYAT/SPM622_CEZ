@@ -126,6 +126,7 @@
             btnCreateBooking.Text = "Add Guest/Booking";
             btnCreateBooking.TextAlign = ContentAlignment.BottomCenter;
             btnCreateBooking.UseVisualStyleBackColor = true;
+            btnCreateBooking.Click += btnCreateBooking_Click;
             // 
             // button1
             // 

@@ -176,13 +176,6 @@ namespace PietieHostelManager
             }
         }
 
-        private void buttonCreateBooking_Click(object sender, EventArgs e)
-        {
-            CreateBookingForm createBooking = new CreateBookingForm();
-            createBooking.Show();
-            this.Enabled = false;
-        }
-
         private void buttonOpenAdmin_Click(object sender, EventArgs e)
         {
             Admin admin = new Admin();
@@ -293,6 +286,14 @@ namespace PietieHostelManager
             UserLogin userLogin = new UserLogin();
             userLogin.Show();
             this.Hide();
+        }
+
+        private void btnCreateBooking_Click(object sender, EventArgs e)
+        {
+
+            CreateBookingForm createBooking = new CreateBookingForm();
+            createBooking.Show();
+            this.Enabled = false;
         }
     }
 }
