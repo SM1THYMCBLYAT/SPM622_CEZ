@@ -67,12 +67,13 @@
             AdminRoomsDataGridView.Size = new Size(690, 176);
             AdminRoomsDataGridView.TabIndex = 1;
             AdminRoomsDataGridView.CellContentClick += AdminRoomsDataGridView_CellContentClick;
+            AdminRoomsDataGridView.SelectionChanged += AdminRoomsDataGridView_SelectionChanged;
             // 
             // AdminAddRoomButton
             // 
             AdminAddRoomButton.Location = new Point(12, 259);
             AdminAddRoomButton.Name = "AdminAddRoomButton";
-            AdminAddRoomButton.Size = new Size(94, 29);
+            AdminAddRoomButton.Size = new Size(94, 55);
             AdminAddRoomButton.TabIndex = 2;
             AdminAddRoomButton.Text = "Add Room";
             AdminAddRoomButton.UseVisualStyleBackColor = true;
@@ -82,7 +83,7 @@
             // 
             AdminEditRoomButton.Location = new Point(148, 259);
             AdminEditRoomButton.Name = "AdminEditRoomButton";
-            AdminEditRoomButton.Size = new Size(94, 29);
+            AdminEditRoomButton.Size = new Size(94, 55);
             AdminEditRoomButton.TabIndex = 3;
             AdminEditRoomButton.Text = "Edit Room";
             AdminEditRoomButton.UseVisualStyleBackColor = true;
@@ -92,7 +93,7 @@
             // 
             AdminDeleteRoomButton.Location = new Point(297, 259);
             AdminDeleteRoomButton.Name = "AdminDeleteRoomButton";
-            AdminDeleteRoomButton.Size = new Size(94, 29);
+            AdminDeleteRoomButton.Size = new Size(94, 55);
             AdminDeleteRoomButton.TabIndex = 4;
             AdminDeleteRoomButton.Text = "Delete Room";
             AdminDeleteRoomButton.UseVisualStyleBackColor = true;
@@ -100,9 +101,9 @@
             // 
             // AdminAddRoomTypeButton
             // 
-            AdminAddRoomTypeButton.Location = new Point(12, 294);
+            AdminAddRoomTypeButton.Location = new Point(12, 320);
             AdminAddRoomTypeButton.Name = "AdminAddRoomTypeButton";
-            AdminAddRoomTypeButton.Size = new Size(94, 29);
+            AdminAddRoomTypeButton.Size = new Size(94, 51);
             AdminAddRoomTypeButton.TabIndex = 5;
             AdminAddRoomTypeButton.Text = "Add Room Type";
             AdminAddRoomTypeButton.UseVisualStyleBackColor = true;
@@ -110,9 +111,9 @@
             // 
             // AdminEditRoomTypeButton
             // 
-            AdminEditRoomTypeButton.Location = new Point(148, 294);
+            AdminEditRoomTypeButton.Location = new Point(148, 320);
             AdminEditRoomTypeButton.Name = "AdminEditRoomTypeButton";
-            AdminEditRoomTypeButton.Size = new Size(94, 29);
+            AdminEditRoomTypeButton.Size = new Size(94, 51);
             AdminEditRoomTypeButton.TabIndex = 6;
             AdminEditRoomTypeButton.Text = "Edit Room Type";
             AdminEditRoomTypeButton.UseVisualStyleBackColor = true;
@@ -120,9 +121,9 @@
             // 
             // AdminDeleteRoomTypeButton
             // 
-            AdminDeleteRoomTypeButton.Location = new Point(297, 294);
+            AdminDeleteRoomTypeButton.Location = new Point(297, 320);
             AdminDeleteRoomTypeButton.Name = "AdminDeleteRoomTypeButton";
-            AdminDeleteRoomTypeButton.Size = new Size(94, 29);
+            AdminDeleteRoomTypeButton.Size = new Size(94, 51);
             AdminDeleteRoomTypeButton.TabIndex = 7;
             AdminDeleteRoomTypeButton.Text = "Delete Room Type";
             AdminDeleteRoomTypeButton.UseVisualStyleBackColor = true;
@@ -132,7 +133,7 @@
             // 
             AdminCreateUserButton.Location = new Point(12, 541);
             AdminCreateUserButton.Name = "AdminCreateUserButton";
-            AdminCreateUserButton.Size = new Size(94, 29);
+            AdminCreateUserButton.Size = new Size(94, 52);
             AdminCreateUserButton.TabIndex = 8;
             AdminCreateUserButton.Text = "Create User";
             AdminCreateUserButton.UseVisualStyleBackColor = true;
@@ -142,7 +143,7 @@
             // 
             AdminChangeUserPasswordButton.Location = new Point(148, 541);
             AdminChangeUserPasswordButton.Name = "AdminChangeUserPasswordButton";
-            AdminChangeUserPasswordButton.Size = new Size(94, 29);
+            AdminChangeUserPasswordButton.Size = new Size(94, 52);
             AdminChangeUserPasswordButton.TabIndex = 9;
             AdminChangeUserPasswordButton.Text = "Change Password";
             AdminChangeUserPasswordButton.UseVisualStyleBackColor = true;
@@ -152,7 +153,7 @@
             // 
             AdminDeleteUserButton.Location = new Point(297, 541);
             AdminDeleteUserButton.Name = "AdminDeleteUserButton";
-            AdminDeleteUserButton.Size = new Size(94, 29);
+            AdminDeleteUserButton.Size = new Size(94, 52);
             AdminDeleteUserButton.TabIndex = 10;
             AdminDeleteUserButton.Text = "Delete User";
             AdminDeleteUserButton.UseVisualStyleBackColor = true;
