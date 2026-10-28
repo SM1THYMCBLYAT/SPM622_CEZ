@@ -325,6 +325,7 @@
             MinimizeBox = false;
             Name = "CreateBookingForm";
             Text = "Create Guest and Booking";
+            FormClosing += CreateBookingForm_FormClosing;
             Load += CreateBooking_Load;
             ((System.ComponentModel.ISupportInitialize)CreateBookingDataGridView).EndInit();
             ResumeLayout(false);

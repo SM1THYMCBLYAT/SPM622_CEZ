@@ -15,12 +15,15 @@ namespace PietieHostelManager
     public partial class CreateBookingForm : Form
     {
         private decimal DailyRate = Properties.Settings.Default.DailyRate;
-        public int? SelectedRoomID { get; private set; }
+        public int SelectedRoomID { get; private set; }
         private string connectionString = ConfigurationManager.ConnectionStrings["HostelDB"].ConnectionString;
+        private MainForm mainFormReference;
+        private long createdGuestID;
 
-        public CreateBookingForm()
+        public CreateBookingForm(MainForm parentForm)
         {
             InitializeComponent();
+            mainFormReference = parentForm;
         }
 
         private bool ValidateGuestInfo()
@@ -75,7 +78,7 @@ namespace PietieHostelManager
             return true;
         }
 
-        private int SaveGuest()
+        private long SaveGuest()
         {
             string query = @"INSERT INTO Guests (FirstName, LastName, PhoneNumber, Email, Occupancy) OUTPUT INSERTED.GuestID
                                  VALUES (@FirstName, @LastName, @PhoneNumber, @Email, @Occupancy);";
@@ -105,7 +108,7 @@ namespace PietieHostelManager
                         .Value = "Pending";
 
                     connection.Open();
-                    return Convert.ToInt32(command.ExecuteScalar());
+                    return Convert.ToInt64(command.ExecuteScalar());
                 }
             }
             catch (SqlException ex)
@@ -233,10 +236,6 @@ namespace PietieHostelManager
                 SelectedRoomID = Convert.ToInt32(
                     selectedRow.Cells["RoomID"].Value);
             }
-            else
-            {
-                SelectedRoomID = null;
-            }
         }
 
         private void CreateBookingButton_Click(object sender, EventArgs e)
@@ -265,8 +264,7 @@ namespace PietieHostelManager
                 return;
             }
 
-            int roomID = Convert.ToInt32(
-                CreateBookingDataGridView.SelectedRows[0].Cells["RoomID"].Value);
+            int roomID = SelectedRoomID;
 
             int numberOfDays = (endDate - startDate).Days;
             decimal totalPrice = numberOfDays * DailyRate;
@@ -279,22 +277,23 @@ namespace PietieHostelManager
             string paymentStatus = CreatePaymentStatusComboBox.Text.Trim();
 
             DateTime nextMonth = startDate.AddMonths(1);
+            if (nextMonth > endDate) { nextMonth = endDate; }
             int daysTillNextBill = (nextMonth - startDate).Days;
-            decimal price = daysTillNextBill * DailyRate; 
+            decimal price = daysTillNextBill * DailyRate;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
-                    int guestID = SaveGuest();
+                    long guestID = SaveGuest();
 
                     string bookingQuery = @"INSERT INTO Bookings (GuestID, RoomID, BookingDateStart, BookingDateEnd, PaymentStatus, TotalPrice, Price)
                                             VALUES (@GuestID, @RoomID, @StartDate, @EndDate, @PaymentStatus, @TotalPrice, @Price);";
 
                     using (SqlCommand command = new SqlCommand(bookingQuery, connection))
                     {
-                        command.Parameters.Add("@GuestID", SqlDbType.Int).Value = guestID;
-                        command.Parameters.Add("@RoomID", SqlDbType.Int).Value = roomID;
+                        command.Parameters.AddWithValue("@GuestID", guestID);
+                        command.Parameters.AddWithValue("@RoomID", roomID);
                         command.Parameters.Add("@StartDate", SqlDbType.Date).Value = startDate;
                         command.Parameters.Add("@EndDate", SqlDbType.Date).Value = endDate;
                         command.Parameters.Add("@PaymentStatus", SqlDbType.VarChar, 20).Value = paymentStatus;
@@ -313,12 +312,12 @@ namespace PietieHostelManager
                         command.ExecuteNonQuery();
                     }
 
+                    createdGuestID = guestID;
+
                     MessageBox.Show(
                         $"Booking created successfully!\nGuest ID: {guestID}\n" +
                         $"Room ID: {roomID}\nNights: {numberOfDays}\n" +
                         $"Total: {totalPrice.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-ZA"))}");
-
-                    LoadRooms();
                 }
                 catch (Exception ex)
                 {
@@ -329,6 +328,42 @@ namespace PietieHostelManager
                         MessageBoxIcon.Error);
                 }
             }
+
+            try
+            {
+                string sql = @"INSERT INTO AuditLog (Username, RecordType, GivenID, QueryDate, Details)
+                               VALUES (@Username, @RecordType, @GivenID, @QueryDate, @Details)";
+
+                string Username = mainFormReference.User;
+                string RecordType = "Guests";
+                long GivenID = createdGuestID;
+                DateTime QueryDate = DateTime.Today;
+                string Details = "Created guest and booking";
+
+                SqlConnection conn = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@Username", Username);
+                cmd.Parameters.AddWithValue("@RecordType", RecordType);
+                cmd.Parameters.AddWithValue("@GivenID", GivenID);
+                cmd.Parameters.Add("@QueryDate", SqlDbType.Date).Value = QueryDate;
+                cmd.Parameters.AddWithValue("@Details", Details);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Database Error:\n\n" + ex,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void BookingStartDatePicker_ValueChanged(object sender, EventArgs e)
@@ -366,15 +401,19 @@ namespace PietieHostelManager
             CreateBookingStartDatePicker.Value = DateTime.Today;
             CreateBookingEndDatePicker.Value = DateTime.Today.AddDays(1);
 
-            CreatePaymentStatusComboBox.SelectedItem = "Pending";
+            CreatePaymentStatusComboBox.SelectedIndex = 0;
 
             CalculateTotalPrice();
 
             CreateBookingDataGridView.ClearSelection();
 
-            SelectedRoomID = null;
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
 
-            this.Hide();
+        private void CreateBookingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

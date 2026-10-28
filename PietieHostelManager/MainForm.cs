@@ -26,7 +26,7 @@ namespace PietieHostelManager
             UserRole = userRole;
         }
 
-        private void LoadRoomsTable()
+        public void LoadRoomsTable()
         {
             try
             {
@@ -77,7 +77,7 @@ namespace PietieHostelManager
             }
         }
 
-        private void LoadBookingsTable()
+        public void LoadBookingsTable()
         {
             try
             {
@@ -85,7 +85,7 @@ namespace PietieHostelManager
                 switch (cmbFilterBooking.SelectedIndex)
                 {
                     case 1:
-                        searchCondition = "CAST(b.BookingID AS VARCHAR) LIKE @SearchText";
+                        searchCondition = "CAST(b.GuestID AS VARCHAR) LIKE @SearchText";
                         break;
                     case 2:
                         searchCondition = "r.RoomNumber LIKE @SearchText";
@@ -104,7 +104,7 @@ namespace PietieHostelManager
                         break;
                 }
                 string sql = $@"SELECT
-                                   b.BookingID,
+                                   b.GuestID,
                                    r.RoomNumber AS [Room#],
                                    (g.FirstName + ' ' + g.LastName) AS [Full Name],
                                    g.PhoneNumber AS [Phone],
@@ -154,7 +154,7 @@ namespace PietieHostelManager
                 dgvBookings.DataSource = bookingsTable;
                 dgvBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
-                dgvBookings.Columns["BookingID"].Width = 80;
+                dgvBookings.Columns["GuestID"].Width = 80;
                 dgvBookings.Columns["Room#"].Width = 80;
                 dgvBookings.Columns["Full Name"].Width = 200;
                 dgvBookings.Columns["Phone"].Width = 88;
@@ -180,8 +180,14 @@ namespace PietieHostelManager
         private void buttonOpenAdmin_Click(object sender, EventArgs e)
         {
             Admin admin = new Admin();
-            admin.Show();
-            this.Enabled = false;
+
+            admin.FormClosed += (s, args) =>
+            {
+                LoadBookingsTable();
+                LoadRoomsTable();
+            };
+
+            admin.ShowDialog();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -222,6 +228,7 @@ namespace PietieHostelManager
         private void MainForm_Shown(object sender, EventArgs e)
         {
             UpdateRoomTypeFilter();
+            UpdateRoomsTable();
             LoadRoomsTable();
             LoadBookingsTable();
             lblUsername.Text = User;
@@ -289,16 +296,65 @@ namespace PietieHostelManager
             this.Hide();
         }
 
+        private void UpdateRoomsTable()
+        {
+            try
+            {
+                string sql = @"UPDATE r
+                       SET r.Status = 
+                           CASE 
+                               WHEN ISNULL(o.CurrentOccupants, 0) = 0 THEN 'Vacant'
+                               WHEN ISNULL(o.CurrentOccupants, 0) >= rt.Capacity THEN 'Full'
+                               ELSE 'Occupied'
+                           END
+                       FROM Rooms r
+                       INNER JOIN RoomTypes rt ON r.Type = rt.Type
+                       LEFT JOIN (
+                           SELECT b.RoomID, COUNT(*) AS CurrentOccupants
+                           FROM Bookings b
+                           INNER JOIN Guests g ON b.GuestID = g.GuestID
+                           WHERE g.Occupancy NOT IN ('Checked Out', 'Cancelled')
+                           GROUP BY b.RoomID
+                       ) o ON r.RoomID = o.RoomID;";
+
+                SqlConnection conn = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Room status could not be updated:\n" + ex.Message,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
         private void btnCreateBooking_Click(object sender, EventArgs e)
         {
-            CreateBookingForm createBooking = new CreateBookingForm();
-            createBooking.Show();
+            CreateBookingForm createBooking = new CreateBookingForm(this);
+
+            if (createBooking.ShowDialog() == DialogResult.OK)
+            {
+                UpdateRoomsTable();
+                LoadBookingsTable();
+                LoadRoomsTable();
+            }
         }
 
         private void btnManageBooking_Click(object sender, EventArgs e)
         {
-            ManageBookingForm manageBooking = new ManageBookingForm();
-            manageBooking.Show();
+            ManageBookingForm manageBooking = new ManageBookingForm(this);
+
+            if (manageBooking.ShowDialog() == DialogResult.OK)
+            {
+                UpdateRoomsTable();
+                LoadBookingsTable();
+                LoadRoomsTable();
+            }
         }
 
         private void UpdatePrices()

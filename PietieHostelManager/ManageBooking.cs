@@ -6,256 +6,119 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace PietieHostelManager
 {
     public partial class ManageBookingForm : Form
     {
-        private int? currentBookingID = null;
-        private int? currentGuestID = null;
+        private string connectionString = ConfigurationManager.ConnectionStrings["HostelDB"].ConnectionString;
+        private decimal DailyRate = Properties.Settings.Default.DailyRate;
+        private int currentBookingID;
+        private int currentGuestID;
+        private DataTable bookingTable;
+        private MainForm mainFormReference;
 
-        private readonly string connectionString = @"Server=localhost;Database=HostelManagementSystem;Integrated Security=True;TrustServerCertificate=True;";
-        public ManageBookingForm()
+        public ManageBookingForm(MainForm parentForm)
         {
             InitializeComponent();
+            mainFormReference = parentForm;
         }
 
-
-        private void LoadManageRooms()
+        private void SearchGuestIDButton_Click(object sender, EventArgs e)
         {
-            string sql = @"
-        SELECT
-            r.RoomID,
-            r.RoomNumber,
-            r.Type,
-            r.Status,
-            rt.Capacity,
-            COUNT(
-                CASE
-                    WHEN g.Occupancy = 'Checked In'
-                         AND b.CheckOutDate IS NULL
-                    THEN b.BookingID
-                END
-            ) AS CurrentOccupants
-        FROM Rooms r
-        INNER JOIN RoomTypes rt ON r.Type = rt.Type
-        LEFT JOIN Bookings b ON r.RoomID = b.RoomID
-        LEFT JOIN Guests g ON b.GuestID = g.GuestID
-        GROUP BY
-            r.RoomID,
-            r.RoomNumber,
-            r.Type,
-            r.Status,
-            rt.Capacity
-        ORDER BY r.RoomNumber;";
-
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                string sqlCheck = @"SELECT COUNT(*) FROM Guests WHERE GuestID = @GuestID";
+                int guestID = int.Parse(ManageSearchGuestIDTextBox.Text.Trim());
+
+                SqlConnection conn = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand(sqlCheck, conn);
+
+                cmd.Parameters.AddWithValue("@GuestID", guestID);
+
+                conn.Open();
+                int iCount = (int)cmd.ExecuteScalar();
+
+                if (iCount == 0)
                 {
-                    DataTable roomsTable = new DataTable();
-                    adapter.Fill(roomsTable);
+                    MessageBox.Show(
+                        "Guest not found",
+                        "Not found",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
 
-                    ManageBookingDataGridView.DataSource = roomsTable;
+                string sql = @"SELECT
+                                   g.FirstName,
+                                   g.LastName,
+                                   g.PhoneNumber,
+                                   g.Email,
+                                   b.BookingDateStart,
+                                   b.BookingDateEnd,
+                                   b.TotalPrice,
+                                   b.PaymentStatus,
+                                   g.Occupancy,
+                                   b.BookingID
+                               FROM Guests g
+                               INNER JOIN Bookings b ON g.GuestID = b.GuestID
+                               WHERE g.GuestID = @GuestID;";
 
-                    // Keep the internal room ID available for selection.
-                    if (ManageBookingDataGridView.Columns.Contains("RoomID"))
-                    {
-                        ManageBookingDataGridView.Columns["RoomID"].Visible = false;
-                    }
+                bookingTable = new DataTable();
+                cmd = new SqlCommand(sql, conn);
 
-                    ManageBookingDataGridView.SelectionMode =
-                        DataGridViewSelectionMode.FullRowSelect;
+                cmd.Parameters.AddWithValue("@GuestID", guestID);
 
-                    ManageBookingDataGridView.MultiSelect = false;
+                SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
+                bookingTable.Clear();
+                sqlAdapter.Fill(bookingTable);
+
+                if (bookingTable.Rows.Count > 0)
+                {
+                    DataRow row = bookingTable.Rows[0];
+                    string FirstName = row["FirstName"].ToString();
+                    string LastName = row["LastName"].ToString();
+                    string Phone = row["PhoneNumber"].ToString();
+                    string Email = row["Email"].ToString();
+                    DateTime startDate = row["BookingDateStart"] != DBNull.Value ? Convert.ToDateTime(row["BookingDateStart"]) : DateTime.Today;
+                    DateTime endDate = row["BookingDateEnd"] != DBNull.Value ? Convert.ToDateTime(row["BookingDateEnd"]) : DateTime.Today.AddDays(1);
+                    decimal Price = Convert.ToDecimal(row["TotalPrice"]);
+                    string PaymentStatus = row["PaymentStatus"].ToString();
+                    string Occupancy = row["Occupancy"].ToString();
+                    int bookingID = Convert.ToInt32(row["BookingID"]);
+
+                    ManageFirstNameTextBox.Text = FirstName;
+                    ManageLastNameTextBox.Text = LastName;
+                    ManagePhoneTextBox.Text = Phone;
+                    ManageEmailTextBox.Text = Email;
+                    ManageStartDateTimePicker.Value = startDate;
+                    ManageEndDateTimePicker.Value = endDate;
+                    ManageTotalPriceTextBox.Text = Price.ToString();
+                    ManagePaymentStatusComboBox.Text = PaymentStatus;
+                    ManageOccupancyComboBox.Text = Occupancy;
+
+                    currentBookingID = bookingID;
+                    currentGuestID = guestID;
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Guest and booking details unabled to be occupied",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
                 }
             }
             catch (SqlException ex)
             {
                 MessageBox.Show(
-                    "Unable to load rooms:\n\n" + ex.Message,
+                    "Database Error:\n\n" + ex,
                     "Database Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-            }
-        }
-
-
-        private void SearchGuestIDButton_Click(object sender, EventArgs e)
-        {
-            ManageRoomLabel.Text = "Room: Not selected";
-
-            if (!int.TryParse(ManageSearchGuestIDTextBox.Text.Trim(), out int guestID))
-            {
-                MessageBox.Show(
-                    "Please enter a valid Guest ID.",
-                    "Invalid Guest ID",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
                 return;
-            }
-
-            string sql = @"
-        SELECT
-            b.BookingID,
-            g.GuestID,
-            b.RoomID,
-            r.RoomNumber,
-            b.BookingDateStart,
-            b.BookingDateEnd,
-            b.Price,
-            b.TotalPrice,
-            b.PaymentStatus,
-            g.FirstName,
-            g.LastName,
-            g.PhoneNumber,
-            g.Email,
-            g.Occupancy
-        FROM Guests g
-        INNER JOIN Bookings b ON b.GuestID = g.GuestID
-        INNER JOIN Rooms r ON r.RoomID = b.RoomID
-        WHERE g.GuestID = @GuestID;";
-
-            try
-            {
-                int roomID;
-                DateTime startDate;
-                DateTime endDate;
-                decimal totalPrice;
-                string paymentStatus;
-                string occupancy;
-
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    cmd.Parameters.Add("@GuestID", SqlDbType.Int).Value = guestID;
-                    conn.Open();
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        // Check whether a booking was found BEFORE reading columns.
-                        if (!reader.Read())
-                        {
-                            currentBookingID = null;
-                            currentGuestID = null;
-
-                            ManageRoomLabel.Text = "Room: Not found";
-
-                            MessageBox.Show(
-                                "No booking was found for this Guest ID.",
-                                "Booking Not Found",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-
-                            return;
-                        }
-
-                        // Read booking details after reader.Read() succeeds.
-                        currentBookingID = Convert.ToInt32(reader["BookingID"]);
-                        currentGuestID = Convert.ToInt32(reader["GuestID"]);
-
-                        roomID = Convert.ToInt32(reader["RoomID"]);
-                        int roomNumber = Convert.ToInt32(reader["RoomNumber"]);
-
-                        ManageRoomLabel.Text = $"Room Number: {roomNumber}";
-
-                        startDate = Convert.ToDateTime(reader["BookingDateStart"]);
-                        endDate = Convert.ToDateTime(reader["BookingDateEnd"]);
-                        totalPrice = Convert.ToDecimal(reader["TotalPrice"]);
-                        paymentStatus = reader["PaymentStatus"].ToString();
-                        occupancy = reader["Occupancy"].ToString();
-
-                        ManageFirstNameTextBox.Text = reader["FirstName"].ToString();
-                        ManageLastNameTextBox.Text = reader["LastName"].ToString();
-
-                        bool noPhone =
-                            reader["PhoneNumber"] == DBNull.Value ||
-                            string.IsNullOrWhiteSpace(reader["PhoneNumber"].ToString());
-
-                        ManageNoPhoneCheckBox.Checked = noPhone;
-                        ManagePhoneTextBox.Text = noPhone
-                            ? ""
-                            : reader["PhoneNumber"].ToString();
-                        ManagePhoneTextBox.Enabled = !noPhone;
-
-                        bool noEmail =
-                            reader["Email"] == DBNull.Value ||
-                            string.IsNullOrWhiteSpace(reader["Email"].ToString());
-
-                        ManageNoEmailCheckBox.Checked = noEmail;
-                        ManageEmailTextBox.Text = noEmail
-                            ? ""
-                            : reader["Email"].ToString();
-                        ManageEmailTextBox.Enabled = !noEmail;
-                    }
-                }
-
-                ManageStartDateTimePicker.Value = startDate;
-                ManageEndDateTimePicker.Value = endDate;
-
-                ManageTotalPriceTextBox.Text = totalPrice.ToString(
-                    "C2",
-                    System.Globalization.CultureInfo.GetCultureInfo("en-ZA"));
-
-                ManagePaymentStatusComboBox.Items.Clear();
-                ManagePaymentStatusComboBox.Items.Add("Pending");
-                ManagePaymentStatusComboBox.Items.Add("Paid");
-                ManagePaymentStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-
-                if (ManagePaymentStatusComboBox.Items.Contains(paymentStatus))
-                {
-                    ManagePaymentStatusComboBox.SelectedItem = paymentStatus;
-                }
-                else
-                {
-                    ManagePaymentStatusComboBox.SelectedIndex = 0;
-                }
-
-                ManageOccupancyComboBox.Items.Clear();
-                ManageOccupancyComboBox.Items.Add("Pending");
-                ManageOccupancyComboBox.Items.Add("Checked In");
-                ManageOccupancyComboBox.Items.Add("Checked Out");
-                ManageOccupancyComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-
-                if (ManageOccupancyComboBox.Items.Contains(occupancy))
-                {
-                    ManageOccupancyComboBox.SelectedItem = occupancy;
-                }
-                else
-                {
-                    ManageOccupancyComboBox.SelectedIndex = 0;
-                }
-
-                LoadManageRooms();
-
-                foreach (DataGridViewRow row in ManageBookingDataGridView.Rows)
-                {
-                    if (row.IsNewRow)
-                        continue;
-
-                    if (Convert.ToInt32(row.Cells["RoomID"].Value) == roomID)
-                    {
-                        row.Selected = true;
-                        ManageBookingDataGridView.CurrentCell = row.Cells["RoomNumber"];
-                        break;
-                    }
-                }
-
-                MessageBox.Show(
-                    "Booking and guest details loaded successfully.",
-                    "Booking Found",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "An error occurred while loading the booking:\n\n" + ex.Message,
-                    "Search Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
             }
         }
 
@@ -267,7 +130,6 @@ namespace PietieHostelManager
             {
                 ManagePhoneTextBox.Clear();
             }
-
         }
 
         private void ManageEmailCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -280,9 +142,176 @@ namespace PietieHostelManager
             }
         }
 
+        private void CalculateTotalPrice()
+        {
+            DateTime startDate = ManageStartDateTimePicker.Value;
+            DateTime endDate = ManageEndDateTimePicker.Value;
+
+            if (endDate <= startDate)
+            {
+                ManageTotalPriceTextBox.Text = "0.00";
+                return;
+            }
+
+            int numberOfDays = (endDate - startDate).Days;
+            decimal totalPrice = numberOfDays * DailyRate;
+
+            ManageTotalPriceTextBox.Text = totalPrice.ToString();
+        }
+
         private void ManageBookingForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void UpdateBookingButton_Click(object sender, EventArgs e)
+        {
+            if (ManageStartDateTimePicker.Value > ManageEndDateTimePicker.Value)
+            {
+                MessageBox.Show(
+                    "Please input valid dates",
+                    "Invalid Criteria",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                string sql = @"UPDATE Guests
+                               SET FirstName = @FirstName,
+                                   LastName = @LastName,
+                                   PhoneNumber = @PhoneNumber,
+                                   Email = @Email,
+                                   Occupancy = @Occupancy
+                               WHERE GuestID = @GuestID;";
+
+                string FirstName = ManageFirstNameTextBox.Text.Trim();
+                string LastName = ManageLastNameTextBox.Text.Trim();
+                int Phone;
+                try { Phone = int.Parse(ManagePhoneTextBox.Text.Trim()); }
+                catch { MessageBox.Show("Enter a valid phone number"); return; }
+                string Email = ManageEmailTextBox.Text.Trim();
+                string Occupancy = ManageOccupancyComboBox.Text.Trim();
+
+                SqlConnection conn = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@FirstName", FirstName);
+                cmd.Parameters.AddWithValue("@LastName", LastName);
+                cmd.Parameters.AddWithValue("@PhoneNumber", Phone);
+                cmd.Parameters.AddWithValue("@Email", Email);
+                cmd.Parameters.AddWithValue("@Occupancy", Occupancy);
+                cmd.Parameters.AddWithValue("@GuestID", currentGuestID);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+                sql = @"UPDATE Bookings 
+                        SET BookingDateStart = @StartDate, 
+                            BookingDateEnd = @EndDate, 
+                            Price = @Price, 
+                            TotalPrice = @TotalPrice, 
+                            PaymentStatus = @PaymentStatus 
+                        WHERE BookingID = @BookingID;";
+
+                DateTime StartDate = ManageStartDateTimePicker.Value;
+                DateTime EndDate = ManageEndDateTimePicker.Value;
+                DateTime NextBillDate = StartDate.AddMonths(1);
+                if (NextBillDate > EndDate) { NextBillDate = EndDate; }
+                decimal Price = (NextBillDate - StartDate).Days * DailyRate;
+                decimal TotalPrice = Convert.ToDecimal(ManageTotalPriceTextBox.Text.Trim());
+                string PaymentStatus = ManagePaymentStatusComboBox.Text;
+
+                cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.Add("@StartDate", SqlDbType.Date).Value = StartDate;
+                cmd.Parameters.Add("@EndDate", SqlDbType.Date).Value = EndDate;
+                cmd.Parameters.AddWithValue("@Price", Price);
+                cmd.Parameters.AddWithValue("@TotalPrice", TotalPrice);
+                cmd.Parameters.AddWithValue("@BookingID", currentBookingID);
+                cmd.Parameters.AddWithValue("@PaymentStatus", PaymentStatus);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Database Error:\n\n" + ex,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void ManageStartDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateTotalPrice();
+        }
+
+        private void ManageEndDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateTotalPrice();
+        }
+
+        private void ManageBookingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                string sql = @"INSERT INTO AuditLog (Username, RecordType, GivenID, QueryDate, Details)
+                               VALUES (@Username, @RecordType, @GivenID, @QueryDate, @Details)";
+
+                string Username = mainFormReference.User;
+                string RecordType = "Bookings";
+                int GivenID = currentBookingID;
+                DateTime QueryDate = DateTime.Today;
+                string Details = "Updated booking";
+
+                SqlConnection conn = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@Username", Username);
+                cmd.Parameters.AddWithValue("@RecordType", RecordType);
+                cmd.Parameters.AddWithValue("@GivenID", GivenID);
+                cmd.Parameters.Add("@QueryDate", SqlDbType.Date).Value = QueryDate;
+                cmd.Parameters.AddWithValue("@Details", Details);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+                RecordType = "Guests";
+                GivenID = currentGuestID;
+                Details = "Updated guest details";
+
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.AddWithValue("@Username", Username);
+                cmd.Parameters.AddWithValue("@RecordType", RecordType);
+                cmd.Parameters.AddWithValue("@GivenID", GivenID);
+                cmd.Parameters.Add("@QueryDate", SqlDbType.Date).Value = QueryDate;
+                cmd.Parameters.AddWithValue("@Details", Details);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Database Error:\n\n" + ex,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void CancelUpdateButton_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }
