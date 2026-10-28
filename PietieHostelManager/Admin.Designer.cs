@@ -173,6 +173,7 @@
             AdminUsersDataGridView.Size = new Size(690, 147);
             AdminUsersDataGridView.TabIndex = 11;
             AdminUsersDataGridView.CellContentClick += AdminUserTable_CellContentClick;
+            AdminUsersDataGridView.SelectionChanged += AdminUserTable_SelectionChanged;
             // 
             // Admin
             // 

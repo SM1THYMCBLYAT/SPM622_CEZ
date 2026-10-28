@@ -16,7 +16,7 @@ namespace PietieHostelManager
 
         private readonly string connectionString =
             @"Server=localhost;Database=HostelManagementSystem;Integrated Security=True;TrustServerCertificate=True;";
-
+        private string? selectedUsername = null;
         public Admin()
         {
             InitializeComponent();
@@ -43,6 +43,13 @@ namespace PietieHostelManager
                     adapter.Fill(table);
 
                     AdminUsersDataGridView.DataSource = table;
+                    AdminUsersDataGridView.SelectionMode =DataGridViewSelectionMode.FullRowSelect;
+
+                    AdminUsersDataGridView.MultiSelect = false;
+
+                    AdminUsersDataGridView.ReadOnly = true;
+
+                    AdminUsersDataGridView.AllowUserToAddRows = false;
                 }
             }
             catch (Exception ex)
@@ -111,6 +118,7 @@ namespace PietieHostelManager
         {
             LoadUsers();
             LoadRooms();
+
         }
 
         private void AdminRoomsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -151,6 +159,20 @@ namespace PietieHostelManager
         {
 
         }
+        private void AdminUserTable_SelectionChanged(
+    object sender, EventArgs e)
+        {
+            if (AdminUsersDataGridView.SelectedRows.Count > 0)
+            {
+                selectedUsername = 
+                    AdminUsersDataGridView.SelectedRows[0]
+                    .Cells["Username"].Value?.ToString();
+            }
+            else
+            {
+                selectedUsername = null;
+            }
+        }
 
         private void AdminCreateUserButton_Click(object sender, EventArgs e)
         {
@@ -164,7 +186,75 @@ namespace PietieHostelManager
 
         private void AdminDeleteUserButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(selectedUsername))
+            {
+                MessageBox.Show(
+                    "Please select a user to delete.",
+                    "No User Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
 
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to delete user '{selectedUsername}'?",
+                "Confirm User Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+            string query = "DELETE FROM Users WHERE Username = @Username";
+
+            try
+            {
+                using (SqlConnection connection =
+                       new SqlConnection(connectionString))
+                using (SqlCommand command =
+                       new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue(
+                        "@Username", selectedUsername);
+
+                    connection.Open();
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show(
+                            "User deleted successfully.",
+                            "Success",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+
+                        selectedUsername = null;
+                        LoadUsers();
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "The selected user could not be found.",
+                            "User Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+
+                        LoadUsers();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to delete user: " + ex.Message,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }
