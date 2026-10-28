@@ -17,6 +17,7 @@ namespace PietieHostelManager
         private SqlDataAdapter sqlAdapter;
         private DataTable roomsTable;
         private DataTable bookingsTable;
+        private decimal DailyRate = Properties.Settings.Default.DailyRate;
 
         public MainForm(string username, string userRole)
         {
@@ -290,10 +291,95 @@ namespace PietieHostelManager
 
         private void btnCreateBooking_Click(object sender, EventArgs e)
         {
-
             CreateBookingForm createBooking = new CreateBookingForm();
             createBooking.Show();
-            this.Enabled = false;
+        }
+
+        private void btnManageBooking_Click(object sender, EventArgs e)
+        {
+            ManageBookingForm manageBooking = new ManageBookingForm();
+            manageBooking.Show();
+        }
+
+        private void UpdatePrices()
+        {
+            try
+            {
+                string selectQuery = "SELECT BookingID, BookingDateStart, BookingDateEnd FROM Bookings";
+                string updateQuery = @"UPDATE Bookings SET Price = @Price, TotalPrice = @TotalPrice WHERE BookingID = @BookingID";
+
+                SqlConnection conn = new SqlConnection(connectionString);
+                conn.Open();
+
+                DataTable bookingsTable = new DataTable();
+
+                SqlCommand selectCmd = new SqlCommand(selectQuery, conn);
+                SqlDataReader reader = selectCmd.ExecuteReader();
+                bookingsTable.Load(reader);
+
+                foreach (DataRow row in bookingsTable.Rows)
+                {
+                    int bookingID = Convert.ToInt32(row["BookingID"]);
+                    DateTime startDate = Convert.ToDateTime(row["BookingDateStart"]);
+                    DateTime endDate = Convert.ToDateTime(row["BookingDateEnd"]);
+
+                    int totalDays = (endDate - startDate).Days;
+                    decimal totalPrice = totalDays * DailyRate;
+
+                    DateTime today = DateTime.Today;
+                    DateTime currentAnchor = new DateTime(today.Year, today.Month, startDate.Day);
+                    DateTime nextAnchor = currentAnchor.AddMonths(1);
+
+                    if (today > endDate)
+                    {
+                        DateTime trackDate = startDate;
+                        while (trackDate < endDate)
+                        {
+                            trackDate = trackDate.AddMonths(1);
+                        }
+                        trackDate = trackDate.AddMonths(-1);
+
+                        currentAnchor = trackDate;
+                        nextAnchor = endDate;
+                    }
+
+                    if (today < startDate)
+                    {
+                        currentAnchor = startDate;
+                        nextAnchor = currentAnchor.AddMonths(1);
+                        if (nextAnchor > endDate)
+                        {
+                            nextAnchor = endDate;
+                        }
+                    }
+
+                    decimal price = (nextAnchor - currentAnchor).Days * DailyRate;
+
+                    SqlCommand cmd = new SqlCommand(updateQuery, conn);
+
+                    cmd.Parameters.AddWithValue("@Price", price);
+                    cmd.Parameters.AddWithValue("@TotalPrice", totalPrice);
+                    cmd.Parameters.AddWithValue("@BookingID", bookingID);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Database Error:\n\n" + ex,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            LoadBookingsTable();
+        }
+
+        private void btnUpdatePrices_Click(object sender, EventArgs e)
+        {
+            UpdatePrices();
         }
     }
 }

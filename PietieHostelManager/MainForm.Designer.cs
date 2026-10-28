@@ -63,6 +63,7 @@
             label3 = new Label();
             cmbOccupancy = new ComboBox();
             dgvBookings = new DataGridView();
+            btnUpdatePrices = new Button();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -75,6 +76,7 @@
             // 
             panel1.BackColor = Color.LightCyan;
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(btnUpdatePrices);
             panel1.Controls.Add(btnManageBooking);
             panel1.Controls.Add(btnCreateBooking);
             panel1.Controls.Add(button1);
@@ -104,6 +106,7 @@
             btnManageBooking.Text = "Manage Guest/Booking";
             btnManageBooking.TextAlign = ContentAlignment.BottomCenter;
             btnManageBooking.UseVisualStyleBackColor = true;
+            btnManageBooking.Click += btnManageBooking_Click;
             // 
             // imageList1
             // 
@@ -458,6 +461,17 @@
             dgvBookings.Size = new Size(1448, 767);
             dgvBookings.TabIndex = 1;
             // 
+            // btnUpdatePrices
+            // 
+            btnUpdatePrices.Font = new Font("Segoe UI", 11F);
+            btnUpdatePrices.Location = new Point(750, 41);
+            btnUpdatePrices.Name = "btnUpdatePrices";
+            btnUpdatePrices.Size = new Size(125, 40);
+            btnUpdatePrices.TabIndex = 12;
+            btnUpdatePrices.Text = "Update Prices";
+            btnUpdatePrices.UseVisualStyleBackColor = true;
+            btnUpdatePrices.Click += btnUpdatePrices_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -523,5 +537,6 @@
         private Button btnManageBooking;
         private Button btnCreateBooking;
         private Button button1;
+        private Button btnUpdatePrices;
     }
 }
