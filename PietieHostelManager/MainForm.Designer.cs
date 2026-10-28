@@ -86,9 +86,10 @@
             panel1.Controls.Add(buttonOpenAdmin);
             panel1.Controls.Add(btnSignOut);
             panel1.Controls.Add(panel4);
-            panel1.Location = new Point(5, 5);
+            panel1.Location = new Point(6, 7);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1910, 206);
+            panel1.Size = new Size(2183, 274);
             panel1.TabIndex = 0;
             // 
             // btnManageBooking
@@ -97,9 +98,10 @@
             btnManageBooking.ImageAlign = ContentAlignment.TopCenter;
             btnManageBooking.ImageKey = "pngtree-vector-plus-icon-png-image_1024584.jpg";
             btnManageBooking.ImageList = imageList1;
-            btnManageBooking.Location = new Point(220, 52);
+            btnManageBooking.Location = new Point(251, 69);
+            btnManageBooking.Margin = new Padding(3, 4, 3, 4);
             btnManageBooking.Name = "btnManageBooking";
-            btnManageBooking.Size = new Size(133, 141);
+            btnManageBooking.Size = new Size(152, 188);
             btnManageBooking.TabIndex = 11;
             btnManageBooking.Text = "Manage Guest/Booking";
             btnManageBooking.TextAlign = ContentAlignment.BottomCenter;
@@ -119,9 +121,10 @@
             btnCreateBooking.ImageAlign = ContentAlignment.TopCenter;
             btnCreateBooking.ImageKey = "pngtree-vector-plus-icon-png-image_1024584.jpg";
             btnCreateBooking.ImageList = imageList1;
-            btnCreateBooking.Location = new Point(37, 51);
+            btnCreateBooking.Location = new Point(42, 68);
+            btnCreateBooking.Margin = new Padding(3, 4, 3, 4);
             btnCreateBooking.Name = "btnCreateBooking";
-            btnCreateBooking.Size = new Size(133, 141);
+            btnCreateBooking.Size = new Size(152, 188);
             btnCreateBooking.TabIndex = 10;
             btnCreateBooking.Text = "Add Guest/Booking";
             btnCreateBooking.TextAlign = ContentAlignment.BottomCenter;
@@ -130,9 +133,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(707, 236);
+            button1.Location = new Point(808, 315);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(86, 31);
             button1.TabIndex = 9;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -142,10 +146,11 @@
             dtpBefore.Checked = false;
             dtpBefore.CustomFormat = "yyyy-MM-dd";
             dtpBefore.Format = DateTimePickerFormat.Custom;
-            dtpBefore.Location = new Point(457, 144);
+            dtpBefore.Location = new Point(522, 192);
+            dtpBefore.Margin = new Padding(3, 4, 3, 4);
             dtpBefore.Name = "dtpBefore";
             dtpBefore.ShowCheckBox = true;
-            dtpBefore.Size = new Size(200, 23);
+            dtpBefore.Size = new Size(228, 27);
             dtpBefore.TabIndex = 8;
             dtpBefore.ValueChanged += dtpBefore_ValueChanged;
             // 
@@ -153,9 +158,9 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F);
-            label8.Location = new Point(457, 122);
+            label8.Location = new Point(522, 163);
             label8.Name = "label8";
-            label8.Size = new Size(51, 19);
+            label8.Size = new Size(63, 23);
             label8.TabIndex = 7;
             label8.Text = "Before:";
             // 
@@ -163,9 +168,9 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10F);
-            label7.Location = new Point(457, 52);
+            label7.Location = new Point(522, 69);
             label7.Name = "label7";
-            label7.Size = new Size(42, 19);
+            label7.Size = new Size(51, 23);
             label7.TabIndex = 6;
             label7.Text = "After:";
             // 
@@ -174,10 +179,11 @@
             dtpAfter.Checked = false;
             dtpAfter.CustomFormat = "yyyy-MM-dd";
             dtpAfter.Format = DateTimePickerFormat.Custom;
-            dtpAfter.Location = new Point(457, 74);
+            dtpAfter.Location = new Point(522, 99);
+            dtpAfter.Margin = new Padding(3, 4, 3, 4);
             dtpAfter.Name = "dtpAfter";
             dtpAfter.ShowCheckBox = true;
-            dtpAfter.Size = new Size(200, 23);
+            dtpAfter.Size = new Size(228, 27);
             dtpAfter.TabIndex = 4;
             dtpAfter.ValueChanged += dtpAfter_ValueChanged;
             // 
@@ -185,9 +191,9 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            label6.Location = new Point(457, 14);
+            label6.Location = new Point(522, 19);
             label6.Name = "label6";
-            label6.Size = new Size(173, 20);
+            label6.Size = new Size(222, 25);
             label6.TabIndex = 3;
             label6.Text = "Filter bookings by date:";
             // 
@@ -197,9 +203,10 @@
             buttonOpenAdmin.ImageAlign = ContentAlignment.TopCenter;
             buttonOpenAdmin.ImageKey = "347895.png";
             buttonOpenAdmin.ImageList = imageList1;
-            buttonOpenAdmin.Location = new Point(1750, 106);
+            buttonOpenAdmin.Location = new Point(2000, 141);
+            buttonOpenAdmin.Margin = new Padding(3, 4, 3, 4);
             buttonOpenAdmin.Name = "buttonOpenAdmin";
-            buttonOpenAdmin.Size = new Size(118, 86);
+            buttonOpenAdmin.Size = new Size(135, 115);
             buttonOpenAdmin.TabIndex = 2;
             buttonOpenAdmin.Text = "Admin Panel";
             buttonOpenAdmin.TextAlign = ContentAlignment.BottomCenter;
@@ -209,9 +216,10 @@
             // btnSignOut
             // 
             btnSignOut.Font = new Font("Segoe UI", 17F);
-            btnSignOut.Location = new Point(1709, 50);
+            btnSignOut.Location = new Point(1953, 67);
+            btnSignOut.Margin = new Padding(3, 4, 3, 4);
             btnSignOut.Name = "btnSignOut";
-            btnSignOut.Size = new Size(200, 42);
+            btnSignOut.Size = new Size(229, 56);
             btnSignOut.TabIndex = 1;
             btnSignOut.Text = "Sign out";
             btnSignOut.UseVisualStyleBackColor = true;
@@ -221,18 +229,19 @@
             // 
             panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(lblUsername);
-            panel4.Location = new Point(1709, -1);
+            panel4.Location = new Point(1953, -1);
+            panel4.Margin = new Padding(3, 4, 3, 4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(200, 45);
+            panel4.Size = new Size(228, 59);
             panel4.TabIndex = 0;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblUsername.Location = new Point(16, 9);
+            lblUsername.Location = new Point(18, 12);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(98, 25);
+            lblUsername.Size = new Size(124, 32);
             lblUsername.TabIndex = 0;
             lblUsername.Text = "HolyChris";
             // 
@@ -246,17 +255,19 @@
             panel2.Controls.Add(cmbRoomType);
             panel2.Controls.Add(cmbRoomStatus);
             panel2.Controls.Add(dgvRooms);
-            panel2.Location = new Point(5, 217);
+            panel2.Location = new Point(6, 289);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(448, 833);
+            panel2.Size = new Size(512, 1110);
             panel2.TabIndex = 1;
             // 
             // btnShowAllRooms
             // 
             btnShowAllRooms.Font = new Font("Segoe UI", 11F);
-            btnShowAllRooms.Location = new Point(359, 23);
+            btnShowAllRooms.Location = new Point(410, 31);
+            btnShowAllRooms.Margin = new Padding(3, 4, 3, 4);
             btnShowAllRooms.Name = "btnShowAllRooms";
-            btnShowAllRooms.Size = new Size(84, 36);
+            btnShowAllRooms.Size = new Size(96, 48);
             btnShowAllRooms.TabIndex = 12;
             btnShowAllRooms.Text = "Show All";
             btnShowAllRooms.UseVisualStyleBackColor = true;
@@ -266,7 +277,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.Location = new Point(176, 5);
+            label2.Location = new Point(201, 7);
             label2.Name = "label2";
             label2.Size = new Size(72, 15);
             label2.TabIndex = 4;
@@ -288,8 +299,9 @@
             cmbRoomType.Font = new Font("Segoe UI", 16F);
             cmbRoomType.FormattingEnabled = true;
             cmbRoomType.Location = new Point(176, 23);
+            cmbRoomType.Margin = new Padding(3, 4, 3, 4);
             cmbRoomType.Name = "cmbRoomType";
-            cmbRoomType.Size = new Size(164, 38);
+            cmbRoomType.Size = new Size(187, 45);
             cmbRoomType.TabIndex = 2;
             cmbRoomType.SelectedIndexChanged += cmbRoomType_SelectedIndexChanged;
             // 
@@ -299,9 +311,10 @@
             cmbRoomStatus.Font = new Font("Segoe UI", 16F);
             cmbRoomStatus.FormattingEnabled = true;
             cmbRoomStatus.Items.AddRange(new object[] { "", "Vacant", "Occupied", "Full", "Unavailable" });
-            cmbRoomStatus.Location = new Point(6, 23);
+            cmbRoomStatus.Location = new Point(7, 31);
+            cmbRoomStatus.Margin = new Padding(3, 4, 3, 4);
             cmbRoomStatus.Name = "cmbRoomStatus";
-            cmbRoomStatus.Size = new Size(164, 38);
+            cmbRoomStatus.Size = new Size(187, 45);
             cmbRoomStatus.TabIndex = 1;
             cmbRoomStatus.SelectedIndexChanged += cmbRoomStatus_SelectedIndexChanged;
             // 
@@ -313,10 +326,12 @@
             dgvRooms.AllowUserToResizeRows = false;
             dgvRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRooms.Location = new Point(3, 61);
+            dgvRooms.Margin = new Padding(3, 4, 3, 4);
             dgvRooms.MultiSelect = false;
             dgvRooms.Name = "dgvRooms";
             dgvRooms.ReadOnly = true;
             dgvRooms.RowHeadersVisible = false;
+            dgvRooms.RowHeadersWidth = 51;
             dgvRooms.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvRooms.Size = new Size(440, 767);
             dgvRooms.TabIndex = 0;
@@ -336,6 +351,7 @@
             panel3.Controls.Add(cmbOccupancy);
             panel3.Controls.Add(dgvBookings);
             panel3.Location = new Point(459, 217);
+            panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
             panel3.Size = new Size(1456, 833);
             panel3.TabIndex = 2;
@@ -343,9 +359,10 @@
             // btnShowAllBookings
             // 
             btnShowAllBookings.Font = new Font("Segoe UI", 11F);
-            btnShowAllBookings.Location = new Point(1367, 23);
+            btnShowAllBookings.Location = new Point(1562, 31);
+            btnShowAllBookings.Margin = new Padding(3, 4, 3, 4);
             btnShowAllBookings.Name = "btnShowAllBookings";
-            btnShowAllBookings.Size = new Size(84, 36);
+            btnShowAllBookings.Size = new Size(96, 48);
             btnShowAllBookings.TabIndex = 11;
             btnShowAllBookings.Text = "Show All";
             btnShowAllBookings.UseVisualStyleBackColor = true;
@@ -355,9 +372,10 @@
             // 
             btnSearchBookings.ImageKey = "search-icon-png-5.png";
             btnSearchBookings.ImageList = imageList2;
-            btnSearchBookings.Location = new Point(961, 23);
+            btnSearchBookings.Location = new Point(1098, 31);
+            btnSearchBookings.Margin = new Padding(3, 4, 3, 4);
             btnSearchBookings.Name = "btnSearchBookings";
-            btnSearchBookings.Size = new Size(40, 36);
+            btnSearchBookings.Size = new Size(46, 48);
             btnSearchBookings.TabIndex = 10;
             btnSearchBookings.UseVisualStyleBackColor = true;
             btnSearchBookings.Click += btnSearchBookings_Click;
@@ -372,18 +390,19 @@
             // txtSearchBox
             // 
             txtSearchBox.Font = new Font("Segoe UI", 16F);
-            txtSearchBox.Location = new Point(209, 24);
+            txtSearchBox.Location = new Point(239, 32);
+            txtSearchBox.Margin = new Padding(3, 4, 3, 4);
             txtSearchBox.Name = "txtSearchBox";
-            txtSearchBox.Size = new Size(746, 36);
+            txtSearchBox.Size = new Size(852, 43);
             txtSearchBox.TabIndex = 9;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.Location = new Point(17, 5);
+            label5.Location = new Point(19, 7);
             label5.Name = "label5";
-            label5.Size = new Size(94, 15);
+            label5.Size = new Size(119, 20);
             label5.TabIndex = 8;
             label5.Text = "Filter search by:";
             // 
@@ -393,18 +412,19 @@
             cmbFilterBooking.Font = new Font("Segoe UI", 16F);
             cmbFilterBooking.FormattingEnabled = true;
             cmbFilterBooking.Items.AddRange(new object[] { "", "Booking ID", "Room Number", "Full Name", "Phone", "Email" });
-            cmbFilterBooking.Location = new Point(17, 23);
+            cmbFilterBooking.Location = new Point(19, 31);
+            cmbFilterBooking.Margin = new Padding(3, 4, 3, 4);
             cmbFilterBooking.Name = "cmbFilterBooking";
-            cmbFilterBooking.Size = new Size(176, 38);
+            cmbFilterBooking.Size = new Size(201, 45);
             cmbFilterBooking.TabIndex = 7;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label4.Location = new Point(1021, 5);
+            label4.Location = new Point(1167, 7);
             label4.Name = "label4";
-            label4.Size = new Size(97, 15);
+            label4.Size = new Size(123, 20);
             label4.TabIndex = 6;
             label4.Text = "Payment Status:";
             // 
@@ -414,9 +434,10 @@
             cmbPaymentStatus.Font = new Font("Segoe UI", 16F);
             cmbPaymentStatus.FormattingEnabled = true;
             cmbPaymentStatus.Items.AddRange(new object[] { "", "Pending", "Paid" });
-            cmbPaymentStatus.Location = new Point(1021, 23);
+            cmbPaymentStatus.Location = new Point(1167, 31);
+            cmbPaymentStatus.Margin = new Padding(3, 4, 3, 4);
             cmbPaymentStatus.Name = "cmbPaymentStatus";
-            cmbPaymentStatus.Size = new Size(164, 38);
+            cmbPaymentStatus.Size = new Size(187, 45);
             cmbPaymentStatus.TabIndex = 5;
             cmbPaymentStatus.SelectedIndexChanged += cmbPaymentStatus_SelectedIndexChanged;
             // 
@@ -424,9 +445,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(1197, 5);
+            label3.Location = new Point(1368, 7);
             label3.Name = "label3";
-            label3.Size = new Size(106, 15);
+            label3.Size = new Size(133, 20);
             label3.TabIndex = 4;
             label3.Text = "Guest Occupancy:";
             // 
@@ -436,9 +457,10 @@
             cmbOccupancy.Font = new Font("Segoe UI", 16F);
             cmbOccupancy.FormattingEnabled = true;
             cmbOccupancy.Items.AddRange(new object[] { "", "Checked In", "Checked Out", "Pending", "Cancelled" });
-            cmbOccupancy.Location = new Point(1197, 23);
+            cmbOccupancy.Location = new Point(1368, 31);
+            cmbOccupancy.Margin = new Padding(3, 4, 3, 4);
             cmbOccupancy.Name = "cmbOccupancy";
-            cmbOccupancy.Size = new Size(164, 38);
+            cmbOccupancy.Size = new Size(187, 45);
             cmbOccupancy.TabIndex = 3;
             cmbOccupancy.SelectedIndexChanged += cmbOccupancy_SelectedIndexChanged;
             // 
@@ -449,21 +471,23 @@
             dgvBookings.AllowUserToResizeColumns = false;
             dgvBookings.AllowUserToResizeRows = false;
             dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBookings.Location = new Point(3, 61);
+            dgvBookings.Location = new Point(3, 81);
+            dgvBookings.Margin = new Padding(3, 4, 3, 4);
             dgvBookings.MultiSelect = false;
             dgvBookings.Name = "dgvBookings";
             dgvBookings.ReadOnly = true;
             dgvBookings.RowHeadersVisible = false;
+            dgvBookings.RowHeadersWidth = 51;
             dgvBookings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBookings.Size = new Size(1448, 767);
+            dgvBookings.Size = new Size(1655, 1023);
             dgvBookings.TabIndex = 1;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SteelBlue;
-            ClientSize = new Size(1924, 1061);
+            ClientSize = new Size(1924, 1055);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);

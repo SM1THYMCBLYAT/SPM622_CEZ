@@ -143,12 +143,126 @@ namespace PietieHostelManager
             }
         }
 
+        private void UpdateRoomTypeFilter()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string sql = "SELECT Type FROM RoomTypes ORDER BY Type";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        conn.Open();
+
+                        FilterRoomTypeComboBox.Items.Clear();
+                        FilterRoomTypeComboBox.Items.Add("");
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                FilterRoomTypeComboBox.Items.Add(reader["Type"].ToString());
+                            }
+                        }
+                    }
+                }
+
+                FilterRoomStatusComboBox.Items.Clear();
+                FilterRoomStatusComboBox.Items.Add("");
+                FilterRoomStatusComboBox.Items.Add("Vacant");
+                FilterRoomStatusComboBox.Items.Add("Occupied");
+                FilterRoomStatusComboBox.Items.Add("Full");
+                FilterRoomStatusComboBox.Items.Add("Unavailable");
+
+                FilterRoomTypeComboBox.SelectedIndex = 0;
+                FilterRoomStatusComboBox.SelectedIndex = 0;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Database Error:\n\n" + ex.Message,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void ApplyRoomFilters()
+        {
+            if (AdminRoomsDataGridView.DataSource is DataTable table)
+            {
+                List<string> filters = new List<string>();
+
+                string selectedType = FilterRoomTypeComboBox.Text;
+                string selectedStatus = FilterRoomStatusComboBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(selectedType))
+                {
+                    string safeType = selectedType.Replace("'", "''");
+                    filters.Add($"[Room Type] = '{safeType}'");
+                }
+
+                if (!string.IsNullOrWhiteSpace(selectedStatus))
+                {
+                    string safeStatus = selectedStatus.Replace("'", "''");
+                    filters.Add($"[Status] = '{safeStatus}'");
+                }
+
+                table.DefaultView.RowFilter = string.Join(" AND ", filters);
+            }
+        }
+
+        private void LoadAuditLog()
+        {
+            try
+            {
+                string sql = @"
+            SELECT
+                AuditID AS [Audit ID],
+                Username AS [Username],
+                RecordType AS [Record Type],
+                QueryDate AS [Query Date],
+                Details AS [Details]
+            FROM AuditLog
+            ORDER BY AuditID DESC;";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+
+                    AdminAuditLogDataGridView.DataSource = table;
+
+                    AdminAuditLogDataGridView.ReadOnly = true;
+                    AdminAuditLogDataGridView.AllowUserToAddRows = false;
+                    AdminAuditLogDataGridView.AllowUserToDeleteRows = false;
+                    AdminAuditLogDataGridView.SelectionMode =
+                        DataGridViewSelectionMode.FullRowSelect;
+                    AdminAuditLogDataGridView.MultiSelect = false;
+                    AdminAuditLogDataGridView.AutoSizeColumnsMode =
+                        DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "Could not load the audit log.\n\n" + ex.Message,
+                    "Audit Log Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
 
         private void Admin_Load(object sender, EventArgs e)
         {
             LoadUsers();
             LoadRooms();
-
+            UpdateRoomTypeFilter();
+            LoadAuditLog();
         }
 
         private void AdminRoomsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -292,6 +406,7 @@ namespace PietieHostelManager
 
             string insertQuery = @"
         INSERT INTO Rooms (RoomNumber, Type, Status)
+        OUTPUT INSERTED.RoomID
         VALUES (@RoomNumber, @Type, @Status);";
 
             try
@@ -307,7 +422,11 @@ namespace PietieHostelManager
 
                     connection.Open();
 
-                    command.ExecuteNonQuery();
+                    int newRoomID = Convert.ToInt32(command.ExecuteScalar());
+                    AuditLogger.LogAction(
+                        "Rooms",
+                        newRoomID,
+                        $"Created room {roomNumber}");
                 }
 
                 MessageBox.Show(
@@ -318,6 +437,7 @@ namespace PietieHostelManager
 
                 selectedRoomID = null;
                 LoadRooms();
+                LoadAuditLog();
             }
             catch (SqlException ex)
             {
@@ -565,16 +685,50 @@ namespace PietieHostelManager
 
                     int rowsAffected = command.ExecuteNonQuery();
 
+
                     if (rowsAffected > 0)
                     {
+                        List<string> changes = new List<string>();
+
+                        if (currentRoomNumber != roomNumber)
+                        {
+                            changes.Add(
+                                $"room number changed from {currentRoomNumber} to {roomNumber}");
+                        }
+
+                        if (!currentType.Equals(
+                            matchingType.Type,
+                            StringComparison.OrdinalIgnoreCase))
+                        {
+                            changes.Add(
+                                $"room type changed from {currentType} to {matchingType.Type}");
+                        }
+
+                        if (changes.Count > 0)
+                        {
+                            string details =
+                                $"Room ID {roomId}: " +
+                                string.Join("; ", changes) + ".";
+
+                            AuditLogger.LogAction(
+                                "Rooms",
+                                roomId,
+                                details);
+
+                            LoadAuditLog();
+                        }
+
                         MessageBox.Show(
-                            "Room updated successfully.",
-                            "Success",
+                            changes.Count > 0
+                                ? "Room updated and audit log recorded successfully."
+                                : "No changes were made to the room.",
+                            "Room Update",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
 
                         LoadRooms();
                     }
+
                     else
                     {
                         MessageBox.Show(
@@ -619,8 +773,62 @@ namespace PietieHostelManager
                 return;
             }
 
+            int roomId = selectedRoomID.Value;
+            int roomNumber;
+            string roomType;
+
+            // Retrieve the room details before deleting it.
+            string selectQuery = @"
+        SELECT RoomNumber, Type
+        FROM Rooms
+        WHERE RoomID = @RoomID;";
+
+            try
+            {
+                using (SqlConnection connection =
+                       new SqlConnection(connectionString))
+                using (SqlCommand command =
+                       new SqlCommand(selectQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@RoomID", roomId);
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                        {
+                            MessageBox.Show(
+                                "The selected room could not be found.",
+                                "Room Not Found",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+
+                            selectedRoomID = null;
+                            LoadRooms();
+                            return;
+                        }
+
+                        roomNumber = Convert.ToInt32(reader["RoomNumber"]);
+                        roomType = reader["Type"].ToString()!;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to retrieve room details: " + ex.Message,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                return;
+            }
+
             DialogResult result = MessageBox.Show(
-                $"Are you sure you want to delete Room ID {selectedRoomID}?",
+                $"Are you sure you want to delete this room?\n\n" +
+                $"Room ID: {roomId}\n" +
+                $"Room Number: {roomNumber}\n" +
+                $"Room Type: {roomType}",
                 "Confirm Room Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
@@ -628,26 +836,34 @@ namespace PietieHostelManager
             if (result != DialogResult.Yes)
                 return;
 
-            string query = "DELETE FROM Rooms WHERE RoomID = @RoomID;";
+            string deleteQuery =
+                "DELETE FROM Rooms WHERE RoomID = @RoomID;";
 
             try
             {
                 using (SqlConnection connection =
                        new SqlConnection(connectionString))
                 using (SqlCommand command =
-                       new SqlCommand(query, connection))
+                       new SqlCommand(deleteQuery, connection))
                 {
-                    command.Parameters.AddWithValue(
-                        "@RoomID", selectedRoomID.Value);
-
+                    command.Parameters.AddWithValue("@RoomID", roomId);
                     connection.Open();
 
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)
                     {
+                        // Log only after the deletion succeeds.
+                        AuditLogger.LogAction(
+                            "Rooms",
+                            roomId,
+                            $"Room ID {roomId}: Deleted room {roomNumber} " +
+                            $"(Type: {roomType}).");
+
+                        LoadAuditLog();
+
                         MessageBox.Show(
-                            "Room deleted successfully.",
+                            "Room deleted and audit log recorded successfully.",
                             "Success",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
@@ -1227,7 +1443,7 @@ namespace PietieHostelManager
         {
             if (AdminUsersDataGridView.SelectedRows.Count > 0)
             {
-                selectedUsername = 
+                selectedUsername =
                     AdminUsersDataGridView.SelectedRows[0]
                     .Cells["Username"].Value?.ToString();
             }
@@ -1519,6 +1735,21 @@ namespace PietieHostelManager
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void FilterRoomTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyRoomFilters();
+        }
+
+        private void FilterRoomStatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyRoomFilters();
+        }
+
+        private void AdminAuditLogDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -106,6 +106,8 @@ namespace PietieHostelManager
 
                 iCount = (int)cmd.ExecuteScalar();
 
+                AppSession.SetUser(username, iCount == 0 ? "Admin" : "Staff");
+
                 if (iCount == 0)
                 {
                     MainForm mainForm = new MainForm(username, "Staff");

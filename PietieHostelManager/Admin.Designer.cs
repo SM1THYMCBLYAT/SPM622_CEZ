@@ -40,8 +40,14 @@
             AdminChangeUserPasswordButton = new Button();
             AdminDeleteUserButton = new Button();
             AdminUsersDataGridView = new DataGridView();
+            FilterRoomTypeComboBox = new ComboBox();
+            FilterRoomStatusComboBox = new ComboBox();
+            label2 = new Label();
+            AdminAuditLogDataGridView = new DataGridView();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)AdminRoomsDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AdminUsersDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdminAuditLogDataGridView).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -60,18 +66,18 @@
             AdminRoomsDataGridView.AllowUserToDeleteRows = false;
             AdminRoomsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             AdminRoomsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AdminRoomsDataGridView.Location = new Point(12, 77);
+            AdminRoomsDataGridView.Location = new Point(9, 76);
             AdminRoomsDataGridView.Name = "AdminRoomsDataGridView";
             AdminRoomsDataGridView.RowHeadersVisible = false;
             AdminRoomsDataGridView.RowHeadersWidth = 51;
-            AdminRoomsDataGridView.Size = new Size(690, 176);
+            AdminRoomsDataGridView.Size = new Size(590, 176);
             AdminRoomsDataGridView.TabIndex = 1;
             AdminRoomsDataGridView.CellContentClick += AdminRoomsDataGridView_CellContentClick;
             AdminRoomsDataGridView.SelectionChanged += AdminRoomsDataGridView_SelectionChanged;
             // 
             // AdminAddRoomButton
             // 
-            AdminAddRoomButton.Location = new Point(12, 259);
+            AdminAddRoomButton.Location = new Point(12, 258);
             AdminAddRoomButton.Name = "AdminAddRoomButton";
             AdminAddRoomButton.Size = new Size(94, 55);
             AdminAddRoomButton.TabIndex = 2;
@@ -81,7 +87,7 @@
             // 
             // AdminEditRoomButton
             // 
-            AdminEditRoomButton.Location = new Point(148, 259);
+            AdminEditRoomButton.Location = new Point(148, 258);
             AdminEditRoomButton.Name = "AdminEditRoomButton";
             AdminEditRoomButton.Size = new Size(94, 55);
             AdminEditRoomButton.TabIndex = 3;
@@ -91,7 +97,7 @@
             // 
             // AdminDeleteRoomButton
             // 
-            AdminDeleteRoomButton.Location = new Point(297, 259);
+            AdminDeleteRoomButton.Location = new Point(297, 258);
             AdminDeleteRoomButton.Name = "AdminDeleteRoomButton";
             AdminDeleteRoomButton.Size = new Size(94, 55);
             AdminDeleteRoomButton.TabIndex = 4;
@@ -101,7 +107,7 @@
             // 
             // AdminAddRoomTypeButton
             // 
-            AdminAddRoomTypeButton.Location = new Point(12, 320);
+            AdminAddRoomTypeButton.Location = new Point(12, 319);
             AdminAddRoomTypeButton.Name = "AdminAddRoomTypeButton";
             AdminAddRoomTypeButton.Size = new Size(94, 51);
             AdminAddRoomTypeButton.TabIndex = 5;
@@ -111,7 +117,7 @@
             // 
             // AdminEditRoomTypeButton
             // 
-            AdminEditRoomTypeButton.Location = new Point(148, 320);
+            AdminEditRoomTypeButton.Location = new Point(148, 319);
             AdminEditRoomTypeButton.Name = "AdminEditRoomTypeButton";
             AdminEditRoomTypeButton.Size = new Size(94, 51);
             AdminEditRoomTypeButton.TabIndex = 6;
@@ -121,7 +127,7 @@
             // 
             // AdminDeleteRoomTypeButton
             // 
-            AdminDeleteRoomTypeButton.Location = new Point(297, 320);
+            AdminDeleteRoomTypeButton.Location = new Point(297, 319);
             AdminDeleteRoomTypeButton.Name = "AdminDeleteRoomTypeButton";
             AdminDeleteRoomTypeButton.Size = new Size(94, 51);
             AdminDeleteRoomTypeButton.TabIndex = 7;
@@ -131,7 +137,7 @@
             // 
             // AdminCreateUserButton
             // 
-            AdminCreateUserButton.Location = new Point(12, 541);
+            AdminCreateUserButton.Location = new Point(12, 575);
             AdminCreateUserButton.Name = "AdminCreateUserButton";
             AdminCreateUserButton.Size = new Size(94, 52);
             AdminCreateUserButton.TabIndex = 8;
@@ -141,7 +147,7 @@
             // 
             // AdminChangeUserPasswordButton
             // 
-            AdminChangeUserPasswordButton.Location = new Point(148, 541);
+            AdminChangeUserPasswordButton.Location = new Point(148, 575);
             AdminChangeUserPasswordButton.Name = "AdminChangeUserPasswordButton";
             AdminChangeUserPasswordButton.Size = new Size(94, 52);
             AdminChangeUserPasswordButton.TabIndex = 9;
@@ -151,7 +157,7 @@
             // 
             // AdminDeleteUserButton
             // 
-            AdminDeleteUserButton.Location = new Point(297, 541);
+            AdminDeleteUserButton.Location = new Point(297, 575);
             AdminDeleteUserButton.Name = "AdminDeleteUserButton";
             AdminDeleteUserButton.Size = new Size(94, 52);
             AdminDeleteUserButton.TabIndex = 10;
@@ -165,22 +171,78 @@
             AdminUsersDataGridView.AllowUserToDeleteRows = false;
             AdminUsersDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             AdminUsersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AdminUsersDataGridView.Location = new Point(12, 388);
+            AdminUsersDataGridView.Location = new Point(12, 422);
             AdminUsersDataGridView.MultiSelect = false;
             AdminUsersDataGridView.Name = "AdminUsersDataGridView";
             AdminUsersDataGridView.RowHeadersVisible = false;
             AdminUsersDataGridView.RowHeadersWidth = 51;
             AdminUsersDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            AdminUsersDataGridView.Size = new Size(690, 147);
+            AdminUsersDataGridView.Size = new Size(587, 147);
             AdminUsersDataGridView.TabIndex = 11;
             AdminUsersDataGridView.CellContentClick += AdminUserTable_CellContentClick;
             AdminUsersDataGridView.SelectionChanged += AdminUserTable_SelectionChanged;
+            // 
+            // FilterRoomTypeComboBox
+            // 
+            FilterRoomTypeComboBox.FormattingEnabled = true;
+            FilterRoomTypeComboBox.Location = new Point(9, 42);
+            FilterRoomTypeComboBox.Name = "FilterRoomTypeComboBox";
+            FilterRoomTypeComboBox.Size = new Size(151, 28);
+            FilterRoomTypeComboBox.TabIndex = 12;
+            FilterRoomTypeComboBox.Text = "Filter Room Type";
+            FilterRoomTypeComboBox.SelectedIndexChanged += FilterRoomTypeComboBox_SelectedIndexChanged;
+            // 
+            // FilterRoomStatusComboBox
+            // 
+            FilterRoomStatusComboBox.FormattingEnabled = true;
+            FilterRoomStatusComboBox.Location = new Point(203, 42);
+            FilterRoomStatusComboBox.Name = "FilterRoomStatusComboBox";
+            FilterRoomStatusComboBox.Size = new Size(151, 28);
+            FilterRoomStatusComboBox.TabIndex = 13;
+            FilterRoomStatusComboBox.Text = "Filter Room Status";
+            FilterRoomStatusComboBox.SelectedIndexChanged += FilterRoomStatusComboBox_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(9, 399);
+            label2.Name = "label2";
+            label2.Size = new Size(200, 20);
+            label2.TabIndex = 14;
+            label2.Text = "User Account Management";
+            // 
+            // AdminAuditLogDataGridView
+            // 
+            AdminAuditLogDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            AdminAuditLogDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            AdminAuditLogDataGridView.Location = new Point(622, 76);
+            AdminAuditLogDataGridView.Name = "AdminAuditLogDataGridView";
+            AdminAuditLogDataGridView.RowHeadersWidth = 51;
+            AdminAuditLogDataGridView.Size = new Size(450, 493);
+            AdminAuditLogDataGridView.TabIndex = 15;
+            AdminAuditLogDataGridView.CellContentClick += AdminAuditLogDataGridView_CellContentClick;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(622, 9);
+            label3.Name = "label3";
+            label3.Size = new Size(78, 20);
+            label3.TabIndex = 16;
+            label3.Text = "Audit Log";
             // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(714, 694);
+            ClientSize = new Size(1132, 653);
+            Controls.Add(label3);
+            Controls.Add(AdminAuditLogDataGridView);
+            Controls.Add(label2);
+            Controls.Add(FilterRoomStatusComboBox);
+            Controls.Add(FilterRoomTypeComboBox);
             Controls.Add(AdminUsersDataGridView);
             Controls.Add(AdminDeleteUserButton);
             Controls.Add(AdminChangeUserPasswordButton);
@@ -193,11 +255,15 @@
             Controls.Add(AdminAddRoomButton);
             Controls.Add(AdminRoomsDataGridView);
             Controls.Add(label1);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Admin";
             Text = "Admin";
+            WindowState = FormWindowState.Maximized;
             Load += Admin_Load;
             ((System.ComponentModel.ISupportInitialize)AdminRoomsDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)AdminUsersDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdminAuditLogDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -216,5 +282,10 @@
         private Button AdminChangeUserPasswordButton;
         private Button AdminDeleteUserButton;
         private DataGridView AdminUsersDataGridView;
+        private ComboBox FilterRoomTypeComboBox;
+        private ComboBox FilterRoomStatusComboBox;
+        private Label label2;
+        private DataGridView AdminAuditLogDataGridView;
+        private Label label3;
     }
 }

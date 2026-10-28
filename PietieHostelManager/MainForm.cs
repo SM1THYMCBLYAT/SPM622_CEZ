@@ -283,6 +283,7 @@ namespace PietieHostelManager
         {
             User = "";
             UserRole = "";
+            AppSession.Clear();
             UserLogin userLogin = new UserLogin();
             userLogin.Show();
             this.Hide();
@@ -294,6 +295,12 @@ namespace PietieHostelManager
             CreateBookingForm createBooking = new CreateBookingForm();
             createBooking.Show();
             this.Enabled = false;
+        }
+
+        private void btnEnterAdminPanel_Click(object sender, EventArgs e)
+        {
+            Admin admin = new Admin();
+            admin.Show();
         }
     }
 }
